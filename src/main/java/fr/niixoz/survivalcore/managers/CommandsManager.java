@@ -5,6 +5,7 @@ import fr.niixoz.survivalcore.commands.*;
 import fr.niixoz.survivalcore.commands.admin.SpeedCommand;
 import fr.niixoz.survivalcore.commands.cosmetic.HatCommand;
 import fr.niixoz.survivalcore.commands.qol.*;
+import fr.niixoz.survivalcore.commands.storage.BackpackCommand;
 import fr.niixoz.survivalcore.commands.teleport.*;
 
 public class CommandsManager {
@@ -36,6 +37,9 @@ public class CommandsManager {
         plugin.getCommand("enchanting_table").setExecutor(new EnchantTableCommand());
         plugin.getCommand("furnace").setExecutor(new FurnaceCommand());
         plugin.getCommand("enderchest").setExecutor(new EnderchestCommand());
+
+        // Storage
+        plugin.getCommand("backpack").setExecutor(new BackpackCommand());
 
         // Admin
         plugin.getCommand("speed").setExecutor(new SpeedCommand());

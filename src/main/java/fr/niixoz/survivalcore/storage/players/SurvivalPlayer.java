@@ -5,10 +5,12 @@ import fr.niixoz.survivalcore.config.Config;
 import fr.niixoz.survivalcore.permissions.PermissionEnum;
 import fr.niixoz.survivalcore.storage.homes.Home;
 import fr.niixoz.survivalcore.tasks.TeleportationTask;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -25,6 +27,9 @@ public class SurvivalPlayer {
     private List<Home> homes = new ArrayList<>();
     private float experience;
     private int level;
+
+    private Inventory backpack;
+
 
     public SurvivalPlayer(UUID uuid) {
         this.player = null;
@@ -149,6 +154,12 @@ public class SurvivalPlayer {
                 e.printStackTrace();
             }
         }
+
+        loadBackpack();
+    }
+
+    public void loadBackpack() {
+        backpack = Bukkit.createInventory(null, 27, "Sac à dos");
     }
 
     public void saveInfo() {
@@ -241,5 +252,9 @@ public class SurvivalPlayer {
 
     public void setLevel(int level) {
         this.level = level;
+    }
+
+    public Inventory getBackpack() {
+        return backpack;
     }
 }
