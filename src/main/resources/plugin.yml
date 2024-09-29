@@ -1,0 +1,173 @@
+name: SurvivalCore
+version: '${version}'
+main: fr.niixoz.survivalcore.SurvivalCore
+api-version: '1.20'
+authors: [ NiixoZ ]
+description: Survival Core plugin
+softdepend:
+  - Vault
+
+commands:
+  svcore:
+    description: Permet de recharger le plugin.
+    usage: /svcore reload
+    aliases: [ survivalcore ]
+
+  tpa:
+    description: Permet d'envoyer une demande de téléportation à un joueur.
+    usage: /tpa <joueur>
+  tpahere:
+    description: Permet d'envoyer une demande de téléportation à un joueur pour le téléporter à vous.
+    usage: /tpahere <joueur>
+  tpaccept:
+    description: Permet d'accepter une demande de téléportation.
+    usage: /tpaccept <joueur>
+  tpdeny:
+    description: Permet de refuser une demande de téléportation.
+    usage: /tpdeny <joueur>
+  home:
+    description: Permet de se téléporter à un home.
+    usage: /home <home>
+  sethome:
+    description: Permet de poser un home.
+    usage: /sethome <home>
+  delhome:
+    description: Permet de supprimer un home.
+    usage: /delhome <home>
+  homes:
+    description: Permet de voir la liste de vos homes.
+    usage: /homes [info]
+  back:
+    description: Retourne à la dernière localisation ( avant téléportation ).
+    usage: /back | /back <joueur>
+  setspawn:
+    description: Permet de définir le spawn.
+    usage: /setspawn
+  spawn:
+    description: Permet de se téléporter au spawn.
+    usage: /spawn [player]
+
+  speed:
+    description: Permet de modifier sa speed.
+    usage: /speed <speed> [player]
+
+  rename:
+    description: Permet de renommer un item.
+    usage: /rename <name>
+  vision:
+    description: Permet d'activer ou désactiver la vision nocturne.
+    usage: /vision
+    aliases: [ nightvision, nv ]
+  feed:
+    description: Permet de se nourrir.
+    usage: /feed [player]
+    aliases: [ eat ]
+  heal:
+    description: Permet de se soigner.
+    usage: /heal [player]
+  fly:
+    description: Permet d'activer ou désactiver le fly.
+    usage: /fly [player]
+  craft:
+    description: Permet d'ouvrir une table de craft.
+    usage: /craft
+  enchanting_table:
+    description: Permet d'ouvrir une table d'enchant.
+    usage: /enchanting_table
+  furnace:
+    description: Permet de faire cuire les items dans la main.
+    usage: /furnace
+  enderchest:
+    description: Permet d'ouvrir l'enderchest.
+    usage: /enderchest
+    aliases: [ ec ]
+
+  backpack:
+    description: Permet d'ouvrir le sac à dos.
+    usage: /backpack
+    aliases: [ bp, sac ]
+
+  hat:
+    description: Permet de mettre un item sur la tête.
+    usage: /hat
+
+
+permissions:
+  survival.*:
+    description: Permet d'avoir toutes les permissions du plugin.
+    children:
+      survival.teleport.*: true
+      survival.home.*: true
+
+  survival.teleport.*:
+    description: Permet d'avoir toutes les permissions de téléportation.
+    children:
+      survival.teleport.tpa: true
+      survival.teleport.tpahere: true
+      survival.teleport.tpaccept: true
+      survival.teleport.tpdeny: true
+      survival.teleport.back: true
+
+  survival.homes.*:
+    description: Permet d'avoir toutes les permissions de homes.
+    children:
+      survival.homes.tp: true
+      survival.homes.sethome: true
+      survival.homes.delhome: true
+      survival.homes.homes: true
+      survival.homes.admin: true
+      survival.homes.limit.bypass: true
+
+  survival.teleport.instant:
+    description: Permet d'être téléporté instantanément.
+  survival.teleport.tpa:
+    description: Permet d'envoyer une demande de téléportation à un joueur.
+  survival.teleport.tpahere:
+    description: Permet d'envoyer une demande de téléportation à un joueur pour le téléporter à vous.
+  survival.teleport.accept:
+    description: Permet d'accepter une demande de téléportation.
+  survival.teleport.deny:
+    description: Permet de refuser une demande de téléportation.
+  survival.teleport.back:
+    description: Retourne à la dernière localisation ( avant téléportation ).
+  survival.homes.tp:
+    description: Permet de se téléporter à un home.
+  survival.homes.sethome:
+    description: Permet de poser un home.
+  survival.homes.delhome:
+    description: Permet de supprimer un home.
+  survival.homes.homes:
+    description: Permet de voir la liste de vos homes.
+  survival.homes.admin:
+    description: Permet de voir la liste des homes d'un joueur.
+  survival.spawn.tp:
+    description: Permet de se téléporter au spawn.
+
+  survival.command.rename_item:
+    description: Permet de renommer un item.
+  survival.command.vision:
+    description: Permet d'activer ou désactiver la vision nocturne.
+  survival.command.feed:
+    description: Permet de se nourrir.
+  survival.command.heal:
+    description: Permet de se soigner.
+  survival.command.fly:
+    description: Permet d'activer ou désactiver le fly.
+  survival.command.craft:
+    description: Permet d'ouvrir une table de craft.
+  survival.command.enchanting_table:
+    description: Permet d'ouvrir une table d'enchant.
+  survival.command.furnace:
+    description: Permet de faire cuire les items dans la main.
+  survival.command.enderchest:
+    description: Permet d'ouvrir l'enderchest.
+
+  survival.command.speed:
+    description: Permet de modifier son speed.
+
+  survival.qol.keep_exp_on_death:
+    description: Permet de garder l'expérience à la mort.
+
+
+  survival.command.hat:
+    description: Permet de mettre un item sur la tête.

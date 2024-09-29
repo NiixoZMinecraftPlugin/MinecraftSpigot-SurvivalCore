@@ -1,0 +1,38 @@
+#################
+# Survival Core #
+#################
+
+## Teleportation
+
+teleport:
+  teleportation-delay: 3
+  teleportation-request-expiration-delay: 300
+  free-move: true
+
+homes:
+  max-homes: 20
+  teleportation-delay: 3
+  free-move: true
+
+back:
+  teleportation-delay: 3
+  free-move: true
+  teleport-causes:
+    - ENDER_PEARL
+    - COMMAND
+    - PLUGIN
+    - DEATH
+    - SPECTATE
+
+spawn:
+    teleportation-delay: 3
+    free-move: false
+    location:
+      world: world
+      x: 0.5
+      y: 64
+      z: 0.5
+      yaw: 0
+      pitch: 0
+  # Teleport causes possible:
+  # CHORUS_FRUIT, COMMAND, DEATH, DISMOUNT, END_GATEWAY, END_PORTAL, ENDER_PEARL, NETHER_PORTAL, PLUGIN, SPECTATE, UNKNOWN
