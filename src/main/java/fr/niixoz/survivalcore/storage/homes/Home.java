@@ -10,10 +10,17 @@ public class Home {
 
     private String name;
     private Location location;
+    private String worldName;
 
     public Home(String name, Location location) {
         this.name = name;
         this.location = location;
+    }
+
+    public Home(String name, Location location, String worldName) {
+        this.name = name;
+        this.location = location;
+        this.worldName = worldName;
     }
 
     public void setLocation(Location location) {
@@ -22,6 +29,14 @@ public class Home {
 
     public Location getLocation() {
         return location;
+    }
+
+    public String getWorldName() {
+        return worldName;
+    }
+
+    public void setWorldName(String worldName) {
+        this.worldName = worldName;
     }
 
     public void setName(String name) {

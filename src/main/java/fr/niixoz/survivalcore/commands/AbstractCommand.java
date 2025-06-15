@@ -62,7 +62,7 @@ public abstract class AbstractCommand implements CommandExecutor, TabCompleter {
     }
 
     public void sendUsage(CommandSender commandSender) {
-        commandSender.sendMessage("§cUsage: " + this.usage);
+        commandSender.sendMessage("§cUtilisation de la commande: " + this.usage);
     }
 
     @Override

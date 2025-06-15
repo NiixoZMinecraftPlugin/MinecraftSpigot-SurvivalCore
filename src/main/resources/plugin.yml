@@ -1,7 +1,7 @@
 name: SurvivalCore
 version: '${version}'
 main: fr.niixoz.survivalcore.SurvivalCore
-api-version: '1.20'
+api-version: '1.21.5'
 authors: [ NiixoZ ]
 description: Survival Core plugin
 softdepend:
@@ -22,9 +22,11 @@ commands:
   tpaccept:
     description: Permet d'accepter une demande de téléportation.
     usage: /tpaccept <joueur>
+    aliases: [ types ]
   tpdeny:
     description: Permet de refuser une demande de téléportation.
     usage: /tpdeny <joueur>
+    aliases: [ tpno ]
   home:
     description: Permet de se téléporter à un home.
     usage: /home <home>
@@ -90,6 +92,12 @@ commands:
   hat:
     description: Permet de mettre un item sur la tête.
     usage: /hat
+  size:
+    description: Permet de changer de taille.
+    usage: /size <xs|small|normal|big|xl>
+  mount:
+    description: Permet de monter sur l'entité visée.
+    usage: /mount
 
 
 permissions:
@@ -171,3 +179,7 @@ permissions:
 
   survival.command.hat:
     description: Permet de mettre un item sur la tête.
+  survival.command.size:
+    description: Permet de changer de taille.
+  survival.command.mount:
+    description: Permet de monter sur l'entité visée.

@@ -50,11 +50,20 @@ public class HomeCommand extends AbstractCommand {
                     return true;
                 }
 
+                if(enderPlayer.getHome(split[1]).getLocation().getWorld() == null) {
+                    MessageUtils.sendPlayerMessage(player, "Le home " + args[0] + " de " + split[0] + " se trouve dans un monde inexistant, vous ne pouvez pas vous y téléporter.");
+                    return true;
+                }
+
                 player.teleport(enderPlayer.getHome(split[1]).getLocation());
                 MessageUtils.sendPlayerMessage(player, "Vous avez été téléporté au home " + split[1] + " de " + split[0]);
                 return true;
             }
             else if(enderPlayer.hasHome(args[0])) {
+                if(enderPlayer.getHome(args[0]).getLocation().getWorld() == null) {
+                    MessageUtils.sendPlayerMessage(player, "Votre home " + args[0] + " se trouve dans un monde inexistant, vous ne pouvez pas vous y téléporter.");
+                    return true;
+                }
                 enderPlayer.teleportToHome(args[0]);
                 return true;
             }

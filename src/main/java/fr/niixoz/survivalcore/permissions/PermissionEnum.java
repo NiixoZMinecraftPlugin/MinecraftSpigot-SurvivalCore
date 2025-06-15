@@ -37,7 +37,8 @@ public enum PermissionEnum {
 
     // COSMETIC
     COMMAND_HAT("survival.command.hat"),
-
+    COMMAND_SIZE("survival.command.size"),
+    COMMAND_MOUNT("survival.command.mount"),
     ;
 
     private String permission;

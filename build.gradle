@@ -3,7 +3,7 @@ plugins {
 }
 
 group = 'fr.niixoz'
-version = '1.0.4.3'
+version = '1.0.5.4'
 
 repositories {
     mavenCentral()
@@ -22,7 +22,8 @@ repositories {
 }
 
 dependencies {
-    compileOnly 'org.spigotmc:spigot-api:1.20.1-R0.1-SNAPSHOT' // The Spigot API with no shadowing. Requires the OSS repo.
+    compileOnly 'org.spigotmc:spigot-api:1.21.5-R0.1-SNAPSHOT' // The Spigot API with no shadowing. Requires the OSS repo.
+    implementation "net.kyori:adventure-api:4.21.0"
 }
 
 def targetJavaVersion = 17

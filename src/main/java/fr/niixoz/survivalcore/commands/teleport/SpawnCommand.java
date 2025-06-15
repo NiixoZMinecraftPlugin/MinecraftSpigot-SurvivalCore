@@ -22,6 +22,10 @@ public class SpawnCommand extends AbstractCommand {
     public boolean executeCommand(Player player, Command command, String s, String[] args) {
 
         if(args.length == 1) {
+            if(!player.hasPermission(PermissionEnum.PERMISSION_ALL.getPermission())) {
+                MessageUtils.sendPlayerMessage(player, "Vous n'avez pas la permission d'utiliser cette commande sur un autre joueur !");
+                return true;
+            }
             Player target = Bukkit.getPlayer(args[0]);
             if(target == null) {
                 MessageUtils.sendPlayerMessage(player, "Le joueur " + args[0] + " n'existe pas !");

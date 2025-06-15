@@ -136,7 +136,7 @@ public class SurvivalPlayer {
                 for (String home : player.getConfigurationSection("homes").getKeys(false)) {
                     String prefix = "homes." + home;
                     Location location = new Location(SurvivalCore.getInstance().getServer().getWorld(player.getString(prefix + ".world")), player.getDouble(prefix + ".x"), player.getDouble(prefix + ".y"), player.getDouble(prefix + ".z"), player.getLong(prefix + ".yaw"), player.getLong(prefix + ".pitch"));
-                    homes.add(new Home(home, location));
+                    homes.add(new Home(home, location, player.getString(prefix + ".world")));
                 }
             }
 
@@ -192,7 +192,12 @@ public class SurvivalPlayer {
 
         for (Home home : this.homes) {
             String prefix = "homes." + home.getName();
-            player.set(prefix + ".world", home.getLocation().getWorld().getName());
+            if(home.getLocation().getWorld() == null) {
+                player.set(prefix + ".world", home.getWorldName());
+            }
+            else {
+                player.set(prefix + ".world", home.getLocation().getWorld().getName());
+            }
             player.set(prefix + ".x", home.getLocation().getX());
             player.set(prefix + ".y", home.getLocation().getY());
             player.set(prefix + ".z", home.getLocation().getZ());
@@ -201,6 +206,9 @@ public class SurvivalPlayer {
         }
 
         if (lastLocation != null) {
+            if(lastLocation.getWorld() == null) {
+                lastLocation.setWorld(SurvivalCore.getInstance().getServer().getWorlds().get(0));
+            }
             player.set("lastLocation.world", lastLocation.getWorld().getName());
             player.set("lastLocation.x", lastLocation.getX());
             player.set("lastLocation.y", lastLocation.getY());

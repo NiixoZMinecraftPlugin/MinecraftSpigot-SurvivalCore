@@ -31,7 +31,7 @@ public class HealCommand extends AbstractCommand {
             player = target;
         }
 
-        player.setHealth(player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
+        player.setHealth(player.getAttribute(Attribute.MAX_HEALTH).getValue());
         MessageUtils.sendPlayerMessage(player, "Vous avez été heal !");
         return true;
     }
