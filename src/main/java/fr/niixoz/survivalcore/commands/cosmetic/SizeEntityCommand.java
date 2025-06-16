@@ -4,21 +4,23 @@ import fr.niixoz.survivalcore.commands.AbstractCommand;
 import fr.niixoz.survivalcore.config.Config;
 import fr.niixoz.survivalcore.permissions.PermissionEnum;
 import fr.niixoz.survivalcore.utils.MessageUtils;
+import fr.niixoz.survivalcore.utils.PlayerUtils;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class SizeCommand extends AbstractCommand {
+public class SizeEntityCommand extends AbstractCommand {
 
-    public SizeCommand() {
-        super("size", "Permet de changer sa taille", "", PermissionEnum.COMMAND_SIZE);
-        this.usage = "/size <" + String.join(" | ", Config.sizes.keySet()) + ">";
+    public SizeEntityCommand() {
+        super("entitysize", "Permet de changer la taille de l'entité visée", "", PermissionEnum.COMMAND_ENTITY_SIZE);
+        this.usage = "/entitysize <" + String.join(" | ", Config.sizes.keySet()) + ">";
     }
 
     @Override
@@ -28,7 +30,13 @@ public class SizeCommand extends AbstractCommand {
             return true;
         }
 
-        AttributeInstance sizeAttribute = player.getAttribute(Attribute.SCALE);
+        Entity e = PlayerUtils.getEntityLookingAt(player, 5);
+        if(!(e instanceof LivingEntity)) {
+            MessageUtils.sendPlayerMessage(player, "§cErreur: Aucune entité visée.");
+            return true;
+        }
+
+        AttributeInstance sizeAttribute = ((LivingEntity) e).getAttribute(Attribute.SCALE);
         if( sizeAttribute == null) {
             MessageUtils.sendPlayerMessage(player, "§cErreur: L'attribut de taille n'est pas disponible.");
             return true;
@@ -43,7 +51,7 @@ public class SizeCommand extends AbstractCommand {
         }
 
         sizeAttribute.setBaseValue(Config.getSize(args[0].toLowerCase()));
-        MessageUtils.sendPlayerMessage(player, "Votre taille a été changé en " + args[0].toLowerCase() + ".");
+        MessageUtils.sendPlayerMessage(player, "La taille de l'entité visée a été changée en " + args[0].toLowerCase() + ".");
 
         return true;
     }

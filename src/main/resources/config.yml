@@ -23,6 +23,8 @@ back:
     - PLUGIN
     - DEATH
     - SPECTATE
+# Teleport causes possible:
+# CHORUS_FRUIT, COMMAND, DEATH, DISMOUNT, END_GATEWAY, END_PORTAL, ENDER_PEARL, NETHER_PORTAL, PLUGIN, SPECTATE, UNKNOWN
 
 spawn:
     teleportation-delay: 3
@@ -34,5 +36,11 @@ spawn:
       z: 0.5
       yaw: 0
       pitch: 0
-  # Teleport causes possible:
-  # CHORUS_FRUIT, COMMAND, DEATH, DISMOUNT, END_GATEWAY, END_PORTAL, ENDER_PEARL, NETHER_PORTAL, PLUGIN, SPECTATE, UNKNOWN
+
+sizes:
+  xs: 0.5
+  small: 0.75
+  big: 1.25
+  xl: 1.5
+# Permission is survival.command.size.<size_name>
+# Size normal 1.0 automatically added.

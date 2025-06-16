@@ -6,6 +6,7 @@ import fr.niixoz.survivalcore.commands.admin.SpeedCommand;
 import fr.niixoz.survivalcore.commands.cosmetic.HatCommand;
 import fr.niixoz.survivalcore.commands.cosmetic.MountCommand;
 import fr.niixoz.survivalcore.commands.cosmetic.SizeCommand;
+import fr.niixoz.survivalcore.commands.cosmetic.SizeEntityCommand;
 import fr.niixoz.survivalcore.commands.qol.*;
 import fr.niixoz.survivalcore.commands.storage.BackpackCommand;
 import fr.niixoz.survivalcore.commands.teleport.*;
@@ -50,5 +51,6 @@ public class CommandsManager {
         plugin.getCommand("hat").setExecutor(new HatCommand());
         plugin.getCommand("size").setExecutor(new SizeCommand());
         plugin.getCommand("mount").setExecutor(new MountCommand());
+        plugin.getCommand("entitysize").setExecutor(new SizeEntityCommand());
     }
 }

@@ -94,10 +94,13 @@ commands:
     usage: /hat
   size:
     description: Permet de changer de taille.
-    usage: /size <xs|small|normal|big|xl>
+    usage: /size <value>
   mount:
     description: Permet de monter sur l'entité visée.
     usage: /mount
+  entitysize:
+    description: Permet de changer la taile de l'entité visée.
+    usage: /entitysize <value>
 
 
 permissions:
@@ -183,3 +186,5 @@ permissions:
     description: Permet de changer de taille.
   survival.command.mount:
     description: Permet de monter sur l'entité visée.
+  survival.command.entity_size:
+    description: Permet de changer la taille de l'entité visée.

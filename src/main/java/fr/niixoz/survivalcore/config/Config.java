@@ -4,11 +4,14 @@ import fr.niixoz.survivalcore.SurvivalCore;
 import fr.niixoz.survivalcore.storage.location.Spawn;
 import fr.niixoz.survivalcore.storage.location.Warp;
 import fr.niixoz.survivalcore.storage.prefix.ChatIcon;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.event.player.PlayerTeleportEvent;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Config {
 
@@ -25,6 +28,8 @@ public class Config {
     public static boolean backFreeMove = false;
     public static List<PlayerTeleportEvent.TeleportCause> backTeleportCauses = new ArrayList<>();
     public static boolean backOnDeath = true;
+
+    public static Map<String, Double> sizes = new HashMap<>();
 
 
     public static void loadConfig() {
@@ -68,6 +73,33 @@ public class Config {
             }
         }
 
+        if(config.contains("sizes")) {
+            sizes.clear();
+            sizes.put("normal", 1.0d);
+            sizes.put("reset", 1.0d);
+            ConfigurationSection sizeSection = config.getConfigurationSection("sizes");
+            if (sizeSection != null) {
+                for (String key : sizeSection.getKeys(false)) {
+                    double value = sizeSection.getDouble(key);
+                    sizes.put(key, value);
+                }
+            }
+        }
+        else {
+            sizes.clear();
+            sizes.put("reset", 1.0d);
+            sizes.put("xs", 0.5d);
+            sizes.put("small", 0.75d);
+            sizes.put("normal", 1.0d);
+            sizes.put("big", 1.25d);
+            sizes.put("xl", 1.5d);
+            config.addDefault("sizes.xs", 0.5d);
+            config.addDefault("sizes.small", 0.75d);
+            config.addDefault("sizes.big", 1.25d);
+            config.addDefault("sizes.xl", 1.5d);
+            plugin.saveDefaultConfig();
+        }
+
         Spawn.loadSpawnConfig(config);
         Warp.loadWarpConfig();
         ChatIcon.loadIconConfig();
@@ -76,5 +108,9 @@ public class Config {
     public static void reload() {
         SurvivalCore.getInstance().reloadConfig();
         loadConfig();
+    }
+
+    public static Double getSize(String size) {
+        return sizes.get(size);
     }
 }
