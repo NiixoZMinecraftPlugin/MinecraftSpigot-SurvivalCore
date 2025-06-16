@@ -1,9 +1,10 @@
 plugins {
     id 'java'
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
 }
 
 group = 'fr.niixoz'
-version = '1.0.5.5'
+version = '1.0.5.6'
 
 repositories {
     mavenCentral()
@@ -24,6 +25,7 @@ repositories {
 dependencies {
     compileOnly 'org.spigotmc:spigot-api:1.21.5-R0.1-SNAPSHOT' // The Spigot API with no shadowing. Requires the OSS repo.
     implementation "net.kyori:adventure-api:4.21.0"
+    implementation 'net.kyori:adventure-platform-bukkit:4.4.0'
 }
 
 def targetJavaVersion = 17
@@ -50,4 +52,9 @@ processResources {
     filesMatching('plugin.yml') {
         expand props
     }
+}
+
+shadowJar {
+    archiveClassifier.set('') // Remplace le jar normal
+    relocate 'net.kyori.adventure', 'fr.niixoz.libs.kyori.adventure' // éviter conflits éventuels
 }

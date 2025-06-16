@@ -10,6 +10,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 
 import java.io.File;
 import java.util.UUID;
@@ -17,10 +18,12 @@ import java.util.UUID;
 public final class SurvivalCore extends JavaPlugin {
 
     private static SurvivalCore instance;
+    private BukkitAudiences adventure;
 
     @Override
     public void onEnable() {
         instance = this;
+        adventure = BukkitAudiences.create(this);
         Config.loadConfig();
 
         registerEvents();
@@ -31,6 +34,10 @@ public final class SurvivalCore extends JavaPlugin {
     public void onDisable() {
         for(SurvivalPlayer enderPlayer : SurvivalPlayer.players) {
             enderPlayer.saveInfo();
+        }
+        if (adventure != null) {
+            adventure.close();
+            adventure = null;
         }
     }
 
@@ -70,6 +77,10 @@ public final class SurvivalCore extends JavaPlugin {
                 SurvivalPlayer.playersUUID.put(player.getName(), player.getUniqueId());
             }
         }
+    }
+
+    public BukkitAudiences getAdventure() {
+        return adventure;
     }
 
     public static SurvivalCore getInstance() {
