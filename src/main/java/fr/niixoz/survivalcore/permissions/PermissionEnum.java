@@ -39,6 +39,9 @@ public enum PermissionEnum {
     COMMAND_HAT("survival.command.hat"),
     COMMAND_SIZE("survival.command.size"),
     COMMAND_ENTITY_SIZE("survival.command.entity_size"),
+    COMMAND_ENTITY_SIZE_ANIMALS("survival.command.entity_size_animals"),
+    COMMAND_ENTITY_SIZE_MONSTERS("survival.command.entity_size_monsters"),
+    COMMAND_ENTITY_SIZE_OTHER("survival.command.entity_size_other"),
     COMMAND_MOUNT("survival.command.mount"),
     ;
 

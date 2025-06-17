@@ -9,9 +9,7 @@ import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -37,6 +35,18 @@ public class SizeEntityCommand extends AbstractCommand {
         }
         if(e instanceof Player) {
             MessageUtils.sendPlayerMessage(player, "§cErreur: Tu ne peux pas changer la taille d'un autre joueur.");
+            return true;
+        }
+        if(e instanceof Animals && !player.hasPermission(PermissionEnum.COMMAND_ENTITY_SIZE_ANIMALS.getPermission())) {
+            MessageUtils.sendPlayerMessage(player, "§cErreur: Tu ne peux pas changer la taille des animaux.");
+            return true;
+        }
+        if(e instanceof Monster && !player.hasPermission(PermissionEnum.COMMAND_ENTITY_SIZE_MONSTERS.getPermission())) {
+            MessageUtils.sendPlayerMessage(player, "§cErreur: Tu ne peux pas changer la taille des monstres.");
+            return true;
+        }
+        if(!(e instanceof Animals) && !(e instanceof Monster) && !player.hasPermission(PermissionEnum.COMMAND_ENTITY_SIZE_OTHER.getPermission())) {
+            MessageUtils.sendPlayerMessage(player, "§cErreur: Tu ne peux pas changer de ce type d'entité.");
             return true;
         }
 
