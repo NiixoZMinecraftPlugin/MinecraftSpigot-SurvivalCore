@@ -35,6 +35,10 @@ public class SizeEntityCommand extends AbstractCommand {
             MessageUtils.sendPlayerMessage(player, "§cErreur: Aucune entité visée.");
             return true;
         }
+        if(e instanceof Player) {
+            MessageUtils.sendPlayerMessage(player, "§cErreur: Tu ne peux pas changer la taille d'un autre joueur.");
+            return true;
+        }
 
         AttributeInstance sizeAttribute = ((LivingEntity) e).getAttribute(Attribute.SCALE);
         if( sizeAttribute == null) {
@@ -45,19 +49,21 @@ public class SizeEntityCommand extends AbstractCommand {
             MessageUtils.sendPlayerMessage(player, "§cErreur: Cette taille n'existe pas.");
             return true;
         }
-        if(!player.hasPermission(PermissionEnum.COMMAND_SIZE + "." + args[0].toLowerCase())) {
-            MessageUtils.sendPlayerMessage(player, "§cErreur: Tu na pas la permission pour cette taille.");
+        if(!player.hasPermission(PermissionEnum.COMMAND_ENTITY_SIZE.getPermission() + "." + args[0].toLowerCase())) {
+            MessageUtils.sendPlayerMessage(player, "§cErreur: Tu n'a pas la permission pour cette taille.");
             return true;
         }
 
         sizeAttribute.setBaseValue(Config.getSize(args[0].toLowerCase()));
         MessageUtils.sendPlayerMessage(player, "La taille de l'entité visée a été changée en " + args[0].toLowerCase() + ".");
-
         return true;
     }
 
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
-        return Config.sizes.keySet().stream().toList();
+        if(args.length == 2) {
+            return null;
+        }
+        return Config.sizes.keySet().stream().filter(size -> sender.hasPermission(PermissionEnum.COMMAND_ENTITY_SIZE.getPermission() + "." + size)).toList();
     }
 }

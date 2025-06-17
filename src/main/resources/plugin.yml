@@ -95,6 +95,7 @@ commands:
   size:
     description: Permet de changer de taille.
     usage: /size <value>
+    aliases: [ scale, resize ]
   mount:
     description: Permet de monter sur l'entité visée.
     usage: /mount
