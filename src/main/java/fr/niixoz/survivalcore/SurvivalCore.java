@@ -2,6 +2,7 @@ package fr.niixoz.survivalcore;
 
 import fr.niixoz.survivalcore.config.Config;
 import fr.niixoz.survivalcore.listeners.MobProtectionHandler;
+import fr.niixoz.survivalcore.listeners.PlantHandler;
 import fr.niixoz.survivalcore.listeners.PlayerHandler;
 import fr.niixoz.survivalcore.managers.CommandsManager;
 import fr.niixoz.survivalcore.storage.players.SurvivalPlayer;
@@ -50,6 +51,7 @@ public final class SurvivalCore extends JavaPlugin {
     public void registerEvents() {
         this.getServer().getPluginManager().registerEvents(new MobProtectionHandler(), this);
         this.getServer().getPluginManager().registerEvents(new PlayerHandler(), this);
+        this.getServer().getPluginManager().registerEvents(new PlantHandler(), this);
     }
 
     private void loadPlayersUUID() {

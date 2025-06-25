@@ -24,7 +24,7 @@ public class PlayerUtils {
         }
         List<Block> sight = player.getLineOfSight(null, range);
         for (Block block : sight) {
-            if (block.getType() != Material.AIR) {
+            if (block.getType().isSolid() && !block.isLiquid()) {
                 break;
             }
             Location low = block.getLocation();
