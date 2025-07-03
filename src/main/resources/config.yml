@@ -44,3 +44,71 @@ sizes:
   xl: 1.5
 # Permission is survival.command.size.<size_name>
 # Size normal 1.0 automatically added.
+
+logger:
+  enabled: true
+  blocks:             # Materiaux SPIGOT: https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Material.html
+    - COAL_ORE
+    - COAL_BLOCK
+    - DEEPSLATE_COAL_ORE
+
+    - IRON_ORE
+    - IRON_BLOCK
+    - DEEPSLATE_IRON_ORE
+
+    - COPPER_ORE
+    - COPPER_BLOCK
+    - DEEPSLATE_COPPER_ORE
+
+    - GOLD_ORE
+    - GOLD_BLOCK
+    - DEEPSLATE_GOLD_ORE
+
+    - DIAMOND_BLOCK
+    - DIAMOND_ORE
+    - DEEPSLATE_DIAMOND_ORE
+
+    - LAPIS_ORE
+    - LAPIS_BLOCK
+    - DEEPSLATE_LAPIS_ORE
+
+    - REDSTONE_ORE
+    - REDSTONE_BLOCK
+    - DEEPSLATE_REDSTONE_ORE
+
+    - EMERALD_ORE
+    - EMERALD_BLOCK
+    - DEEPSLATE_EMERALD_BLOCK
+
+    - ANCIENT_DEBRIS
+    - NETHERITE_BLOCK
+
+    - CHEST
+    - TRAPPED_CHEST
+    - BARREL
+    - DISPENSER
+    - DROPPER
+    - HOPPER
+    - ENCHANTING_TABLE
+    - ANVIL
+    - BEACON
+    - BEE_NEST
+    - BEEHIVE
+
+    - BLACK_SHULKER_BOX
+    - BLUE_SHULKER_BOX
+    - BROWN_SHULKER_BOX
+    - CYAN_SHULKER_BOX
+    - GRAY_SHULKER_BOX
+    - GREEN_SHULKER_BOX
+    - LIGHT_BLUE_SHULKER_BOX
+    - LIGHT_GRAY_SHULKER_BOX
+    - LIME_SHULKER_BOX
+    - MAGENTA_SHULKER_BOX
+    - ORANGE_SHULKER_BOX
+    - PINK_SHULKER_BOX
+    - PURPLE_SHULKER_BOX
+    - RED_SHULKER_BOX
+    - WHITE_SHULKER_BOX
+    - YELLOW_SHULKER_BOX
+    - SHULKER_BOX

@@ -40,6 +40,7 @@ public class CommandsManager {
         plugin.getCommand("enchanting_table").setExecutor(new EnchantTableCommand());
         plugin.getCommand("furnace").setExecutor(new FurnaceCommand());
         plugin.getCommand("enderchest").setExecutor(new EnderchestCommand());
+        plugin.getCommand("mending").setExecutor(new MendingCommand());
 
         // Storage
         plugin.getCommand("backpack").setExecutor(new BackpackCommand());

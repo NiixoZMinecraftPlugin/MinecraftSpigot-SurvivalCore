@@ -29,6 +29,7 @@ public enum PermissionEnum {
     COMMAND_ENDERCHEST("survival.command.enderchest"),
     COMMAND_ENCHANTING_TABLE("survival.command.enchanting_table"),
     COMMAND_SPEED("survival.command.speed"),
+    COMMAND_MENDING("survival.command.mending"),
 
     // STORAGE
     COMMAND_BACKPACK("survival.storage.backpack"),

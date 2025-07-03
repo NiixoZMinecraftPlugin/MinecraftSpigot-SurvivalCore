@@ -8,10 +8,7 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.event.player.PlayerTeleportEvent;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Config {
 
@@ -44,6 +41,7 @@ public class Config {
         SurvivalCore plugin = SurvivalCore.getInstance();
         plugin.saveDefaultConfig();
         FileConfiguration config = plugin.getConfig();
+        loadDefaultConfig(config);
 
         tpaTeleportationDelay = config.getInt("teleport.teleportation-delay");
         tpaTeleportationRequestExpirationDelay = config.getInt("teleport.teleportation-request-expiration-delay");
@@ -103,6 +101,15 @@ public class Config {
         Spawn.loadSpawnConfig(config);
         Warp.loadWarpConfig();
         ChatIcon.loadIconConfig();
+    }
+
+    private static void loadDefaultConfig(FileConfiguration config){
+        config.addDefault("logger.enabled", true);
+        config.addDefault("logger.blocks", Arrays.asList(
+                "DIAMOND_BLOCK",
+                "DIAMOND_ORE",
+                "ANCIENT_DEBRIS"
+        ));
     }
 
     public static void reload() {

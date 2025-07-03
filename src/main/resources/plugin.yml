@@ -102,6 +102,9 @@ commands:
   entitysize:
     description: Permet de changer la taile de l'entité visée.
     usage: /entitysize <value>
+  mending:
+    description: Permet réparer un item mending avec son exp.
+    usage: /mending
 
 
 permissions:
@@ -189,3 +192,5 @@ permissions:
     description: Permet de monter sur l'entité visée.
   survival.command.entity_size:
     description: Permet de changer la taille de l'entité visée.
+  survival.command.mending:
+    description: Permet d'utiliser la commande /mending.

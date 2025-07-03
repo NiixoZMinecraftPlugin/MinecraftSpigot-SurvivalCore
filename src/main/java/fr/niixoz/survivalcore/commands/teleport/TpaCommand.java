@@ -3,7 +3,7 @@ package fr.niixoz.survivalcore.commands.teleport;
 import fr.niixoz.survivalcore.commands.AbstractCommand;
 import fr.niixoz.survivalcore.config.Config;
 import fr.niixoz.survivalcore.permissions.PermissionEnum;
-import fr.niixoz.survivalcore.tasks.TeleportUtils;
+import fr.niixoz.survivalcore.utils.TeleportUtils;
 import fr.niixoz.survivalcore.tasks.TeleportationTask;
 import fr.niixoz.survivalcore.tasks.WaitingTeleportTask;
 import org.bukkit.Bukkit;

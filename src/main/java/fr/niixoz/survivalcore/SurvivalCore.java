@@ -1,6 +1,7 @@
 package fr.niixoz.survivalcore;
 
 import fr.niixoz.survivalcore.config.Config;
+import fr.niixoz.survivalcore.listeners.LoggerHandler;
 import fr.niixoz.survivalcore.listeners.MobProtectionHandler;
 import fr.niixoz.survivalcore.listeners.PlantHandler;
 import fr.niixoz.survivalcore.listeners.PlayerHandler;
@@ -11,7 +12,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
-import net.kyori.adventure.platform.bukkit.BukkitAudiences;
+//import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 
 import java.io.File;
 import java.util.UUID;
@@ -19,12 +20,12 @@ import java.util.UUID;
 public final class SurvivalCore extends JavaPlugin {
 
     private static SurvivalCore instance;
-    private BukkitAudiences adventure;
+    //private BukkitAudiences adventure;
 
     @Override
     public void onEnable() {
         instance = this;
-        adventure = BukkitAudiences.create(this);
+        //adventure = BukkitAudiences.create(this);
         Config.loadConfig();
 
         registerEvents();
@@ -36,10 +37,10 @@ public final class SurvivalCore extends JavaPlugin {
         for(SurvivalPlayer enderPlayer : SurvivalPlayer.players) {
             enderPlayer.saveInfo();
         }
-        if (adventure != null) {
+        /*if (adventure != null) {
             adventure.close();
             adventure = null;
-        }
+        }*/
     }
 
     private void initPlugin() {
@@ -51,7 +52,7 @@ public final class SurvivalCore extends JavaPlugin {
     public void registerEvents() {
         this.getServer().getPluginManager().registerEvents(new MobProtectionHandler(), this);
         this.getServer().getPluginManager().registerEvents(new PlayerHandler(), this);
-        this.getServer().getPluginManager().registerEvents(new PlantHandler(), this);
+        new LoggerHandler();
     }
 
     private void loadPlayersUUID() {
@@ -81,9 +82,9 @@ public final class SurvivalCore extends JavaPlugin {
         }
     }
 
-    public BukkitAudiences getAdventure() {
+    /*public BukkitAudiences getAdventure() {
         return adventure;
-    }
+    }*/
 
     public static SurvivalCore getInstance() {
         return instance;
