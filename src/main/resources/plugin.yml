@@ -106,6 +106,10 @@ commands:
     description: Permet réparer un item mending avec son exp.
     usage: /mending
 
+  invsee:
+    description: Permet de voir l'inventaire d'un joueur.
+    usage: /invsee <joueur>
+
 
 permissions:
   survival.*:
@@ -194,3 +198,9 @@ permissions:
     description: Permet de changer la taille de l'entité visée.
   survival.command.mending:
     description: Permet d'utiliser la commande /mending.
+
+
+  survival.admin.command.invsee:
+    description: Permet de voir l'inventaire d'un joueur.
+  survival.admin.command.enderchest.others:
+    description: Permet d'ouvrir l'enderchest d'un joueur.

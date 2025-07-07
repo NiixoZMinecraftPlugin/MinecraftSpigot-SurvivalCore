@@ -44,6 +44,11 @@ public enum PermissionEnum {
     COMMAND_ENTITY_SIZE_MONSTERS("survival.command.entity_size_monsters"),
     COMMAND_ENTITY_SIZE_OTHER("survival.command.entity_size_other"),
     COMMAND_MOUNT("survival.command.mount"),
+
+
+    // ADMIN
+    COMMAND_ADMIN_INVSEE("survival.admin.command.invsee"),
+    COMMAND_ENDERCHEST_OTHERS("survival.admin.command.enderchest.others"),
     ;
 
     private String permission;

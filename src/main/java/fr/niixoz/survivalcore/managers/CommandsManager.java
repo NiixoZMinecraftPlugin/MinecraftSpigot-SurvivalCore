@@ -2,6 +2,7 @@ package fr.niixoz.survivalcore.managers;
 
 import fr.niixoz.survivalcore.SurvivalCore;
 import fr.niixoz.survivalcore.commands.*;
+import fr.niixoz.survivalcore.commands.admin.InvseeCommand;
 import fr.niixoz.survivalcore.commands.admin.SpeedCommand;
 import fr.niixoz.survivalcore.commands.cosmetic.HatCommand;
 import fr.niixoz.survivalcore.commands.cosmetic.MountCommand;
@@ -15,7 +16,10 @@ public class CommandsManager {
 
     public static void registerCommands() {
         SurvivalCore plugin = SurvivalCore.getInstance();
+
+        // Admin
         plugin.getCommand("svcore").setExecutor(new CoreCommand());
+        plugin.getCommand("invsee").setExecutor(new InvseeCommand());
 
         // Teleport
         plugin.getCommand("tpa").setExecutor(new TpaCommand());
