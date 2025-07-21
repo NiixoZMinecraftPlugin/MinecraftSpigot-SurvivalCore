@@ -135,14 +135,26 @@ public class SurvivalPlayer {
             if(player.contains("homes")) {
                 for (String home : player.getConfigurationSection("homes").getKeys(false)) {
                     String prefix = "homes." + home;
-                    Location location = new Location(SurvivalCore.getInstance().getServer().getWorld(player.getString(prefix + ".world")), player.getDouble(prefix + ".x"), player.getDouble(prefix + ".y"), player.getDouble(prefix + ".z"), player.getLong(prefix + ".yaw"), player.getLong(prefix + ".pitch"));
+                    Location location = new Location(
+                            SurvivalCore.getInstance().getServer().getWorld(player.getString(prefix + ".world")),
+                            player.getDouble(prefix + ".x"),
+                            player.getDouble(prefix + ".y"),
+                            player.getDouble(prefix + ".z"),
+                            (float) player.getDouble(prefix + ".yaw"),
+                            (float) player.getDouble(prefix + ".pitch"));
                     homes.add(new Home(home, location, player.getString(prefix + ".world")));
                 }
             }
 
             if(player.contains("lastLocation") && player.contains("lastLocation.world") && player.contains("lastLocation.x") && player.contains("lastLocation.y") && player.contains("lastLocation.z") && player.contains("lastLocation.yaw") && player.contains("lastLocation.pitch"))
             {
-                Location lastLocation = new Location(SurvivalCore.getInstance().getServer().getWorld(player.getString("lastLocation.world")), player.getDouble("lastLocation.x"), player.getDouble("lastLocation.y"), player.getDouble("lastLocation.z"), player.getLong("lastLocation.yaw"), player.getLong("lastLocation.pitch"));
+                Location lastLocation = new Location(
+                        SurvivalCore.getInstance().getServer().getWorld(player.getString("lastLocation.world")),
+                        player.getDouble("lastLocation.x"),
+                        player.getDouble("lastLocation.y"),
+                        player.getDouble("lastLocation.z"),
+                        (float) player.getDouble("lastLocation.yaw"),
+                        (float) player.getDouble("lastLocation.pitch"));
                 this.setLastLocation(lastLocation);
             }
         }
