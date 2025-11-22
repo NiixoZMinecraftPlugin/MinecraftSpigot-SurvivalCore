@@ -100,7 +100,7 @@ commands:
     description: Permet de monter sur l'entité visée.
     usage: /mount
   entitysize:
-    description: Permet de changer la taile de l'entité visée.
+    description: Permet de changer la taille de l'entité visée.
     usage: /entitysize <value>
   mending:
     description: Permet réparer un item mending avec son exp.

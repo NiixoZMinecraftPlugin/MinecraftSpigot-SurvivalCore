@@ -6,8 +6,6 @@ import fr.niixoz.survivalcore.utils.MessageUtils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 
 import java.util.Arrays;
 import java.util.List;
@@ -65,7 +63,7 @@ public class SpeedCommand extends AbstractCommand {
             return null;
 
         if(args.length == 1) {
-            return Arrays.asList("reset", "1", "2", "3", "4", "5", "6", "7", "8", "9", "1");
+            return Arrays.asList("reset", "1", "2", "3", "4", "5", "6", "7", "8", "9");
         }
 
         if(args.length == 2) {

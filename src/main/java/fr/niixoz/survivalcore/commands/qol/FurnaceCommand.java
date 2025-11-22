@@ -4,13 +4,13 @@ import fr.niixoz.survivalcore.commands.AbstractCommand;
 import fr.niixoz.survivalcore.permissions.PermissionEnum;
 import fr.niixoz.survivalcore.utils.MessageUtils;
 import org.bukkit.Bukkit;
-import org.bukkit.block.Furnace;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.FurnaceRecipe;
+import org.bukkit.inventory.CookingRecipe;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
+import org.bukkit.inventory.RecipeChoice;
 
 import java.util.Arrays;
 import java.util.Iterator;
@@ -25,26 +25,29 @@ public class FurnaceCommand extends AbstractCommand {
     @Override
     public boolean executeCommand(Player player, Command command, String s, String[] args) {
 
-        ItemStack result;
         final ItemStack item = player.getInventory().getItemInMainHand();
         if(item.getType().isAir()) {
             MessageUtils.sendPlayerMessage(player, "§cVous devez avoir un item dans la main.");
             return true;
         }
         final Iterator<Recipe> it = Bukkit.recipeIterator();
-        while(it.hasNext()) {
+        while (it.hasNext()) {
             final Recipe recipe = it.next();
-            if(!(recipe instanceof FurnaceRecipe)) continue;
-            FurnaceRecipe furnaceRecipe = (FurnaceRecipe) recipe;
-            if(!furnaceRecipe.getInput().isSimilar(item))
-                continue;
 
-            result = furnaceRecipe.getResult();
+            if (!(recipe instanceof CookingRecipe<?> cookingRecipe)) continue;
+
+            RecipeChoice choice = cookingRecipe.getInputChoice();
+            if (!choice.test(item)) {
+                continue;
+            }
+
+            ItemStack result = cookingRecipe.getResult().clone();
             result.setAmount(item.getAmount());
+
             player.getInventory().setItemInMainHand(result);
-            player.giveExp((int) (furnaceRecipe.getExperience()*item.getAmount()));
+            player.giveExp((int) (cookingRecipe.getExperience() * item.getAmount()));
             player.updateInventory();
-            MessageUtils.sendPlayerMessage(player, "§aLes items ont été cuit.");
+            MessageUtils.sendPlayerMessage(player, "§aLes items ont été cuits.");
             return true;
         }
         MessageUtils.sendPlayerMessage(player, "§cCet item ne peut pas être cuit.");
