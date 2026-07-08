@@ -26,6 +26,7 @@ public class CommandsManager {
         plugin.getCommand("sethome").setExecutor(new SethomeCommand());
         plugin.getCommand("delhome").setExecutor(new DelhomeCommand());
         plugin.getCommand("homes").setExecutor(new HomesCommand());
+        plugin.getCommand("nearhome").setExecutor(new NearHomeCommand());
         plugin.getCommand("back").setExecutor(new BackCommand());
         plugin.getCommand("spawn").setExecutor(new SpawnCommand());
         plugin.getCommand("setspawn").setExecutor(new SetSpawnCommand());
@@ -37,10 +38,13 @@ public class CommandsManager {
         plugin.getCommand("heal").setExecutor(new HealCommand());
         plugin.getCommand("fly").setExecutor(new FlyCommand());
         plugin.getCommand("craft").setExecutor(new CraftCommand());
-        plugin.getCommand("enchanting_table").setExecutor(new EnchantTableCommand());
+        plugin.getCommand("enchanting_table").setExecutor(new EnchantTableCommand(new VirtualEnchantingManager(SurvivalCore.getInstance())));
         plugin.getCommand("furnace").setExecutor(new FurnaceCommand());
         plugin.getCommand("enderchest").setExecutor(new EnderchestCommand());
         plugin.getCommand("mending").setExecutor(new MendingCommand());
+        plugin.getCommand("anvil").setExecutor(new AnvilCommand());
+        plugin.getCommand("trash").setExecutor(new TrashCommand());
+
 
         // Storage
         plugin.getCommand("backpack").setExecutor(new BackpackCommand());

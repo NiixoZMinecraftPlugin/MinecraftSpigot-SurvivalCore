@@ -11,7 +11,12 @@ import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class MobProtectionHandler implements Listener {
+
+    private List<EntityType> entityTypes = Arrays.asList(EntityType.CAMEL, EntityType.CAMEL_HUSK);
 
     @EventHandler
     public void onMobSpawn(EntitySpawnEvent e) {
@@ -23,7 +28,7 @@ public class MobProtectionHandler implements Listener {
 
     @EventHandler
     public void onMobDamage(EntityDamageByBlockEvent e) {
-        if(e.getEntityType() == EntityType.CAMEL && e.getCause() == EntityDamageEvent.DamageCause.CONTACT && e.getDamager().getType() == Material.CACTUS) {
+        if(entityTypes.contains(e.getEntityType()) && e.getCause() == EntityDamageEvent.DamageCause.CONTACT && e.getDamager().getType() == Material.CACTUS) {
             e.setCancelled(true);
         }
     }

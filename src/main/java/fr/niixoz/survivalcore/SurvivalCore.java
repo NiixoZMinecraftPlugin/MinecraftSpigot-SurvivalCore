@@ -1,10 +1,7 @@
 package fr.niixoz.survivalcore;
 
 import fr.niixoz.survivalcore.config.Config;
-import fr.niixoz.survivalcore.listeners.LoggerHandler;
-import fr.niixoz.survivalcore.listeners.MobProtectionHandler;
-import fr.niixoz.survivalcore.listeners.PlantHandler;
-import fr.niixoz.survivalcore.listeners.PlayerHandler;
+import fr.niixoz.survivalcore.listeners.*;
 import fr.niixoz.survivalcore.managers.CommandsManager;
 import fr.niixoz.survivalcore.storage.players.SurvivalPlayer;
 import org.bukkit.Bukkit;
@@ -48,10 +45,10 @@ public final class SurvivalCore extends JavaPlugin {
         checkForOnlinePlayer();
         loadPlayersUUID();
     }
-
     public void registerEvents() {
         this.getServer().getPluginManager().registerEvents(new MobProtectionHandler(), this);
         this.getServer().getPluginManager().registerEvents(new PlayerHandler(), this);
+        this.getServer().getPluginManager().registerEvents(new CommandHandler(), this);
         new LoggerHandler();
     }
 

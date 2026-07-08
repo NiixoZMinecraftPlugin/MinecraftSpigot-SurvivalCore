@@ -1,7 +1,7 @@
 name: SurvivalCore
 version: '${version}'
 main: fr.niixoz.survivalcore.SurvivalCore
-api-version: '1.21.5'
+api-version: '1.21.6'
 authors: [ NiixoZ ]
 description: Survival Core plugin
 softdepend:
@@ -39,6 +39,9 @@ commands:
   homes:
     description: Permet de voir la liste de vos homes.
     usage: /homes [info]
+  nearhome:
+    description: Voir les homes proches de votre position.
+    usage: /nearhome <rayon>
   back:
     description: Retourne à la dernière localisation ( avant téléportation ).
     usage: /back | /back <joueur>
@@ -103,9 +106,16 @@ commands:
     description: Permet de changer la taile de l'entité visée.
     usage: /entitysize <value>
   mending:
-    description: Permet réparer un item mending avec son exp.
+    description: Permet de réparer un item Mending avec son exp.
     usage: /mending
-
+    aliases: [ raccommodage ]
+  anvil:
+    description: Permet d'ouvrir une enclume.
+    usage: /anvil
+  trash:
+    description: Permet d'ouvrir une poubelle.
+    usage: /trash
+    aliases: [ poubelle ]
 
 permissions:
   survival.*:
@@ -131,6 +141,7 @@ permissions:
       survival.homes.delhome: true
       survival.homes.homes: true
       survival.homes.admin: true
+      survival.homes.nearhome: true
       survival.homes.limit.bypass: true
 
   survival.teleport.instant:
@@ -155,6 +166,8 @@ permissions:
     description: Permet de voir la liste de vos homes.
   survival.homes.admin:
     description: Permet de voir la liste des homes d'un joueur.
+  survival.homes.nearhome:
+    description: Permet de voir les homes proches de sa position.
   survival.spawn.tp:
     description: Permet de se téléporter au spawn.
 
@@ -176,6 +189,10 @@ permissions:
     description: Permet de faire cuire les items dans la main.
   survival.command.enderchest:
     description: Permet d'ouvrir l'enderchest.
+  survival.command.anvil:
+    description: Permet d'ouvrir une enclume virtuelle.
+  survival.command.trash:
+    description: Ouvre une poubelle pour détruire des items.
 
   survival.command.speed:
     description: Permet de modifier son speed.

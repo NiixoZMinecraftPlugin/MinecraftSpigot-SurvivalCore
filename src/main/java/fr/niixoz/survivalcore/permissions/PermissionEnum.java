@@ -16,6 +16,7 @@ public enum PermissionEnum {
     HOME_LIMIT_BYPASS("survival.homes.limit.bypass"),
     COMMAND_HOMES("survival.homes.homes"),
     COMMAND_HOMES_ADMIN("survival.homes.admin"),
+    COMMAND_NEARHOME("survival.homes.nearhome"),
     COMMAND_SPAWN("survival.spawn.tp"),
 
     // QOL
@@ -28,6 +29,8 @@ public enum PermissionEnum {
     COMMAND_FURNACE("survival.command.furnace"),
     COMMAND_ENDERCHEST("survival.command.enderchest"),
     COMMAND_ENCHANTING_TABLE("survival.command.enchanting_table"),
+    COMMAND_TRASH("survival.command.trash"),
+    COMMAND_ANVIL("survival.command.anvil"),
     COMMAND_SPEED("survival.command.speed"),
     COMMAND_MENDING("survival.command.mending"),
 

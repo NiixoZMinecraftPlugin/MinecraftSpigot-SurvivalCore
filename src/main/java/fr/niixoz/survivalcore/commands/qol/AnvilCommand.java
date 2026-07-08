@@ -1,9 +1,7 @@
 package fr.niixoz.survivalcore.commands.qol;
 
 import fr.niixoz.survivalcore.commands.AbstractCommand;
-import fr.niixoz.survivalcore.managers.VirtualEnchantingManager;
 import fr.niixoz.survivalcore.permissions.PermissionEnum;
-import fr.niixoz.survivalcore.utils.MessageUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -14,19 +12,16 @@ import org.bukkit.inventory.Inventory;
 import java.util.Arrays;
 import java.util.List;
 
-public class EnchantTableCommand extends AbstractCommand {
+public class AnvilCommand extends AbstractCommand {
 
-    private final VirtualEnchantingManager manager;
-
-    public EnchantTableCommand(VirtualEnchantingManager manager) {
-        super("enchanting_table", "Permet d'ouvrir une table d'enchant.", "/enchanting_table", PermissionEnum.COMMAND_ENCHANTING_TABLE);
-        this.manager = manager;
+    public AnvilCommand() {
+        super("anvil", "Permet d'ouvrir une enclume.", "/anvil", PermissionEnum.COMMAND_ANVIL);
     }
 
     @Override
     public boolean executeCommand(Player player, Command command, String s, String[] args) {
-        MessageUtils.sendPlayerMessage(player, "Coming soon...");
-        //manager.openTable(player);
+        Inventory anvilInv = Bukkit.createInventory(player, InventoryType.ANVIL, "Enclume portable");
+        player.openInventory(anvilInv);
         return true;
     }
 

@@ -1,9 +1,7 @@
 package fr.niixoz.survivalcore.commands.qol;
 
 import fr.niixoz.survivalcore.commands.AbstractCommand;
-import fr.niixoz.survivalcore.managers.VirtualEnchantingManager;
 import fr.niixoz.survivalcore.permissions.PermissionEnum;
-import fr.niixoz.survivalcore.utils.MessageUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -14,19 +12,16 @@ import org.bukkit.inventory.Inventory;
 import java.util.Arrays;
 import java.util.List;
 
-public class EnchantTableCommand extends AbstractCommand {
+public class TrashCommand extends AbstractCommand {
 
-    private final VirtualEnchantingManager manager;
-
-    public EnchantTableCommand(VirtualEnchantingManager manager) {
-        super("enchanting_table", "Permet d'ouvrir une table d'enchant.", "/enchanting_table", PermissionEnum.COMMAND_ENCHANTING_TABLE);
-        this.manager = manager;
+    public TrashCommand() {
+        super("trash", "Ouvre une poubelle pour détruire des items.", "/trash", PermissionEnum.COMMAND_TRASH);
     }
 
     @Override
     public boolean executeCommand(Player player, Command command, String s, String[] args) {
-        MessageUtils.sendPlayerMessage(player, "Coming soon...");
-        //manager.openTable(player);
+        Inventory trashInv = Bukkit.createInventory(null, 27, "Poubelle");
+        player.openInventory(trashInv);
         return true;
     }
 
