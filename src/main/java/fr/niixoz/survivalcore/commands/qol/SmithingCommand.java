@@ -6,23 +6,22 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.MenuType;
-import org.bukkit.inventory.view.EnchantmentView;
+import org.bukkit.inventory.view.AnvilView;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class EnchantTableCommand extends AbstractCommand {
+public class SmithingCommand extends AbstractCommand {
 
-    public EnchantTableCommand() {
-        super("enchanting_table", "Permet d'ouvrir une table d'enchant.", "/enchanting_table", PermissionEnum.COMMAND_ENCHANTING_TABLE);
+    public SmithingCommand() {
+        super("smithing", "Permet d'ouvrir une Smithing Table.", "/smithing", PermissionEnum.COMMAND_SMITHING_TABLE);
     }
 
     @Override
     public boolean executeCommand(Player player, Command command, String s, String[] args) {
 
-        EnchantmentView view = MenuType.ENCHANTMENT.create(player, "Enchanting Table Portable");
-        player.openInventory(view);
-
+        player.openInventory(MenuType.SMITHING.create(player, "Smithing Table Portable"));
+        
         return true;
     }
 

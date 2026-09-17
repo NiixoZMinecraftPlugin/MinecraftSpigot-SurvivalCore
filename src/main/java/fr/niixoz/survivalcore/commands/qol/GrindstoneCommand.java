@@ -6,23 +6,21 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.MenuType;
-import org.bukkit.inventory.view.EnchantmentView;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class EnchantTableCommand extends AbstractCommand {
+public class GrindstoneCommand extends AbstractCommand {
 
-    public EnchantTableCommand() {
-        super("enchanting_table", "Permet d'ouvrir une table d'enchant.", "/enchanting_table", PermissionEnum.COMMAND_ENCHANTING_TABLE);
+    public GrindstoneCommand() {
+        super("grindstone", "Permet d'ouvrir un Grindstone.", "/grindstone", PermissionEnum.COMMAND_GRINDSTONE);
     }
 
     @Override
     public boolean executeCommand(Player player, Command command, String s, String[] args) {
 
-        EnchantmentView view = MenuType.ENCHANTMENT.create(player, "Enchanting Table Portable");
-        player.openInventory(view);
-
+        player.openInventory(MenuType.GRINDSTONE.create(player, "Grindstone Portable"));
+        
         return true;
     }
 

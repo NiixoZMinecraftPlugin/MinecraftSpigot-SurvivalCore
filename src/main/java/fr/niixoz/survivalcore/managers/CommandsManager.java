@@ -4,6 +4,7 @@ import fr.niixoz.survivalcore.SurvivalCore;
 import fr.niixoz.survivalcore.commands.*;
 import fr.niixoz.survivalcore.commands.admin.InvseeCommand;
 import fr.niixoz.survivalcore.commands.admin.SpeedCommand;
+import fr.niixoz.survivalcore.commands.admin.VanishCommand;
 import fr.niixoz.survivalcore.commands.cosmetic.HatCommand;
 import fr.niixoz.survivalcore.commands.cosmetic.MountCommand;
 import fr.niixoz.survivalcore.commands.cosmetic.SizeCommand;
@@ -11,55 +12,96 @@ import fr.niixoz.survivalcore.commands.cosmetic.SizeEntityCommand;
 import fr.niixoz.survivalcore.commands.qol.*;
 import fr.niixoz.survivalcore.commands.storage.BackpackCommand;
 import fr.niixoz.survivalcore.commands.teleport.*;
+import org.bukkit.Bukkit;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.PluginCommand;
 
 public class CommandsManager {
 
     public static void registerCommands() {
-        SurvivalCore plugin = SurvivalCore.getInstance();
-
         // Admin
-        plugin.getCommand("svcore").setExecutor(new CoreCommand());
-        plugin.getCommand("invsee").setExecutor(new InvseeCommand());
+        registerCommand("svcore", new CoreCommand());
+        registerCommand("invsee",  new InvseeCommand());
+        registerCommand("vanish", new VanishCommand());
 
         // Teleport
-        plugin.getCommand("tpa").setExecutor(new TpaCommand());
-        plugin.getCommand("tpaccept").setExecutor(new TpAcceptCommand());
-        plugin.getCommand("tpdeny").setExecutor(new TpDenyCommand());
-        plugin.getCommand("tpahere").setExecutor(new TpaHereCommand());
-        plugin.getCommand("home").setExecutor(new HomeCommand());
-        plugin.getCommand("sethome").setExecutor(new SethomeCommand());
-        plugin.getCommand("delhome").setExecutor(new DelhomeCommand());
-        plugin.getCommand("homes").setExecutor(new HomesCommand());
-        plugin.getCommand("nearhome").setExecutor(new NearHomeCommand());
-        plugin.getCommand("back").setExecutor(new BackCommand());
-        plugin.getCommand("spawn").setExecutor(new SpawnCommand());
-        plugin.getCommand("setspawn").setExecutor(new SetSpawnCommand());
+        registerCommand("tpa", new TpaCommand());
+        registerCommand("tpaccept", new TpAcceptCommand());
+        registerCommand("tpdeny", new TpDenyCommand());
+        registerCommand("tpahere", new TpaHereCommand());
+        registerCommand("home", new HomeCommand());
+        registerCommand("sethome", new SethomeCommand());
+        registerCommand("delhome", new DelhomeCommand());
+        registerCommand("homes", new HomesCommand());
+        registerCommand("nearhome", new NearHomeCommand());
+        registerCommand("back", new BackCommand());
+        registerCommand("spawn", new SpawnCommand());
+        registerCommand("setspawn", new SetSpawnCommand());
 
         // QOL
-        plugin.getCommand("rename").setExecutor(new RenameItemCommand());
-        plugin.getCommand("vision").setExecutor(new VisionCommand());
-        plugin.getCommand("feed").setExecutor(new FeedCommand());
-        plugin.getCommand("heal").setExecutor(new HealCommand());
-        plugin.getCommand("fly").setExecutor(new FlyCommand());
-        plugin.getCommand("craft").setExecutor(new CraftCommand());
-        plugin.getCommand("enchanting_table").setExecutor(new EnchantTableCommand(new VirtualEnchantingManager(SurvivalCore.getInstance())));
-        plugin.getCommand("furnace").setExecutor(new FurnaceCommand());
-        plugin.getCommand("enderchest").setExecutor(new EnderchestCommand());
-        plugin.getCommand("mending").setExecutor(new MendingCommand());
-        plugin.getCommand("anvil").setExecutor(new AnvilCommand());
-        plugin.getCommand("trash").setExecutor(new TrashCommand());
+        registerCommand("rename", new RenameItemCommand());
+        registerCommand("vision", new VisionCommand());
+        registerCommand("feed", new FeedCommand());
+        registerCommand("heal", new HealCommand());
+        registerCommand("fly", new FlyCommand());
+        registerCommand("craft", new CraftCommand());
+        registerCommand("enchanting_table", new EnchantTableCommand());
+        registerCommand("furnace", new FurnaceCommand());
+        registerCommand("enderchest", new EnderchestCommand());
+        registerCommand("mending", new MendingCommand());
+        registerCommand("anvil", new AnvilCommand());
+        registerCommand("loom", new LoomCommand());
+        registerCommand("smithing", new SmithingCommand());
+        registerCommand("cartography", new CartographyCommand());
+        registerCommand("stonecutter", new StonecutterCommand());
+        registerCommand("grindstone", new GrindstoneCommand());
+        registerCommand("trash", new TrashCommand());
+        registerCommand("component", new ComponentCommand());
+        registerCommand("sleep", new SleepCommand());
 
 
         // Storage
-        plugin.getCommand("backpack").setExecutor(new BackpackCommand());
+        registerCommand("backpack", new BackpackCommand());
 
         // Admin
-        plugin.getCommand("speed").setExecutor(new SpeedCommand());
+        registerCommand("speed", new SpeedCommand());
 
         // Cosmetic
-        plugin.getCommand("hat").setExecutor(new HatCommand());
-        plugin.getCommand("size").setExecutor(new SizeCommand());
-        plugin.getCommand("mount").setExecutor(new MountCommand());
-        plugin.getCommand("entitysize").setExecutor(new SizeEntityCommand());
+        registerCommand("hat", new HatCommand());
+        registerCommand("size", new SizeCommand());
+        registerCommand("mount", new MountCommand());
+        registerCommand("entitysize", new SizeEntityCommand());
+    }
+
+    private static void registerCommand(String commandName, CommandExecutor executor) {
+        SurvivalCore plugin = SurvivalCore.getInstance();
+        // getCommand() (et pas Bukkit.getPluginCommand()) : retombe sur "survivalcore:<cmd>"
+        // et ne retourne que les commandes qui nous appartiennent, même si un autre
+        // plugin (Essentials) a déjà réservé le label.
+        PluginCommand pluginCommand = plugin.getCommand(commandName);
+        if (pluginCommand != null) {
+            pluginCommand.setExecutor(executor);
+            return;
+        }
+        plugin.getLogger().warning("[CommandManager] " + commandName + " not found! Verify plugin.yml! "
+                + "(label \"" + commandName + "\" -> " + describeOwner(commandName)
+                + ", label \"survivalcore:" + commandName + "\" -> " + describeOwner("survivalcore:" + commandName) + ")");
+    }
+
+    /** Décrit qui possède un label dans le CommandMap, pour diagnostiquer les conflits entre plugins. */
+    private static String describeOwner(String label) {
+        try {
+            Object commandMap = Bukkit.getServer().getClass().getMethod("getCommandMap").invoke(Bukkit.getServer());
+            Command command = (Command) commandMap.getClass()
+                    .getMethod("getCommand", String.class).invoke(commandMap, label);
+            if (command == null) {
+                return "absent";
+            }
+            String owner = (command instanceof PluginCommand pc) ? pc.getPlugin().getName() : "?";
+            return command.getClass().getSimpleName() + " (plugin: " + owner + ")";
+        } catch (Exception e) {
+            return "introuvable: " + e.getClass().getSimpleName();
+        }
     }
 }

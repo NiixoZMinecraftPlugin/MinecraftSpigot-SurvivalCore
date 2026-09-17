@@ -8,10 +8,16 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.util.BoundingBox;
 
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public class PlayerUtils {
+
+    public static final Set<Material> BLOCKS = Set.of(
+            Material.WATER,
+            Material.AIR,
+            Material.CAVE_AIR,
+            Material.VOID_AIR
+    );
 
     public static Entity getEntityLookingAt(Player player, int range) {
         List<Entity> entities = player.getNearbyEntities(range, range, range);
@@ -22,7 +28,7 @@ public class PlayerUtils {
                 iterator.remove();
             }
         }
-        List<Block> sight = player.getLineOfSight(null, range);
+        List<Block> sight = player.getLineOfSight(BLOCKS, range);
         for (Block block : sight) {
             if (block.getType().isSolid() && !block.isLiquid()) {
                 break;

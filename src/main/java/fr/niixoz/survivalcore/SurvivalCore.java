@@ -3,6 +3,8 @@ package fr.niixoz.survivalcore;
 import fr.niixoz.survivalcore.config.Config;
 import fr.niixoz.survivalcore.listeners.*;
 import fr.niixoz.survivalcore.managers.CommandsManager;
+import fr.niixoz.survivalcore.managers.SleepManager;
+import fr.niixoz.survivalcore.managers.VanishManager;
 import fr.niixoz.survivalcore.storage.players.SurvivalPlayer;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -31,6 +33,8 @@ public final class SurvivalCore extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        VanishManager.disable();
+        SleepManager.disable();
         for(SurvivalPlayer enderPlayer : SurvivalPlayer.players) {
             enderPlayer.saveInfo();
         }
@@ -44,11 +48,14 @@ public final class SurvivalCore extends JavaPlugin {
         CommandsManager.registerCommands();
         checkForOnlinePlayer();
         loadPlayersUUID();
+        VanishManager.load();
     }
     public void registerEvents() {
         this.getServer().getPluginManager().registerEvents(new MobProtectionHandler(), this);
         this.getServer().getPluginManager().registerEvents(new PlayerHandler(), this);
         this.getServer().getPluginManager().registerEvents(new CommandHandler(), this);
+        this.getServer().getPluginManager().registerEvents(new VanishHandler(), this);
+        this.getServer().getPluginManager().registerEvents(new SleepHandler(), this);
         new LoggerHandler();
     }
 

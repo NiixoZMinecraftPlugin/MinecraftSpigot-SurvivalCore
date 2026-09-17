@@ -8,6 +8,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.InventoryView;
+import org.bukkit.inventory.MenuType;
+import org.bukkit.inventory.view.AnvilView;
 
 import java.util.Arrays;
 import java.util.List;
@@ -20,8 +23,10 @@ public class AnvilCommand extends AbstractCommand {
 
     @Override
     public boolean executeCommand(Player player, Command command, String s, String[] args) {
-        Inventory anvilInv = Bukkit.createInventory(player, InventoryType.ANVIL, "Enclume portable");
-        player.openInventory(anvilInv);
+
+        AnvilView view = MenuType.ANVIL.create(player, "Enclume Portable");
+        player.openInventory(view);
+
         return true;
     }
 

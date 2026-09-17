@@ -28,7 +28,28 @@ public class SethomeCommand extends AbstractCommand {
         }
 
         if(args.length == 1) {
-            if(enderPlayer.hasHome(args[0])) {
+            if(args[0].contains(":") && player.hasPermission(PermissionEnum.PERMISSION_ALL.getPermission())) {
+                String[] split = args[0].split(":");
+                if (split.length != 2) {
+                    MessageUtils.sendPlayerMessage(player, "§c/sethome <joueur:home>");
+                    return true;
+                }
+                if (!SurvivalPlayer.playersUUID.containsKey(split[0])) {
+                    MessageUtils.sendPlayerMessage(player, "§cLe joueur " + split[0] + " n'existe pas.");
+                    return true;
+                }
+
+                enderPlayer = new SurvivalPlayer(SurvivalPlayer.playersUUID.get(split[0]));
+                if (enderPlayer.hasHome(split[1])) {
+                    MessageUtils.sendPlayerMessage(player, "§cLe joueur " + split[0] + " a déjà un home nommé " + split[1]);
+                    return true;
+                }
+
+                enderPlayer.addHome(args[0], player.getLocation());
+                MessageUtils.sendPlayerMessage(player, "Le home " + args[0] + " pour le joueur" + split[0] + " a été créé avec succès !");
+                return true;
+            }
+            else if(enderPlayer.hasHome(args[0])) {
                 MessageUtils.sendPlayerMessage(player, "Vous avez déjà un home nommé " + args[0]);
                 return true;
             }

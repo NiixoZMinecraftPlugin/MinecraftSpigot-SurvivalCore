@@ -11,6 +11,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class RenameItemCommand extends AbstractCommand {
@@ -37,7 +38,13 @@ public class RenameItemCommand extends AbstractCommand {
                     name.append(arg).append(" ");
                 }
                 ItemMeta meta = player.getInventory().getItemInMainHand().getItemMeta();
-                meta.setDisplayName(name.toString());
+                assert meta != null;
+                /*if(args[0].equalsIgnoreCase("normal") && player.hasPermission(PermissionEnum.COMMAND_RENAME_ITEM_NORMAL.getPermission())) {
+                    meta.setItemName(name.toString());
+                }
+                else {*/
+                    meta.setDisplayName(name.toString());
+                //}
                 player.getInventory().getItemInMainHand().setItemMeta(meta);
                 MessageUtils.sendPlayerMessage(player, "§aL'item a été renommé en §e" + name.toString());
                 return true;
@@ -47,6 +54,12 @@ public class RenameItemCommand extends AbstractCommand {
 
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
-        return Arrays.asList("");
+        //if (!(sender instanceof Player))
+            return Collections.emptyList();
+
+        /*return switch (args.length) {
+            case 1 -> sender.hasPermission(PermissionEnum.COMMAND_RENAME_ITEM_NORMAL.getPermission()) ? Arrays.asList("normal") : Collections.emptyList();
+            default -> Collections.emptyList();
+        };*/
     }
 }

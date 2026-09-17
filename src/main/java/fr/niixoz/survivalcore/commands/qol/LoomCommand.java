@@ -6,21 +6,22 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.MenuType;
-import org.bukkit.inventory.view.EnchantmentView;
+import org.bukkit.inventory.view.AnvilView;
+import org.bukkit.inventory.view.LoomView;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class EnchantTableCommand extends AbstractCommand {
+public class LoomCommand extends AbstractCommand {
 
-    public EnchantTableCommand() {
-        super("enchanting_table", "Permet d'ouvrir une table d'enchant.", "/enchanting_table", PermissionEnum.COMMAND_ENCHANTING_TABLE);
+    public LoomCommand() {
+        super("loom", "Permet d'ouvrir un Loom.", "/lom", PermissionEnum.COMMAND_LOOM);
     }
 
     @Override
     public boolean executeCommand(Player player, Command command, String s, String[] args) {
 
-        EnchantmentView view = MenuType.ENCHANTMENT.create(player, "Enchanting Table Portable");
+        LoomView view = MenuType.LOOM.create(player, "Loom Portable");
         player.openInventory(view);
 
         return true;

@@ -21,6 +21,7 @@ public enum PermissionEnum {
 
     // QOL
     COMMAND_RENAME_ITEM("survival.command.rename_item"),
+    COMMAND_RENAME_ITEM_NORMAL("survival.command.rename_item.normal"),
     COMMAND_VISION("survival.command.vision"),
     COMMAND_FEED("survival.command.feed"),
     COMMAND_HEAL("survival.command.heal"),
@@ -31,8 +32,15 @@ public enum PermissionEnum {
     COMMAND_ENCHANTING_TABLE("survival.command.enchanting_table"),
     COMMAND_TRASH("survival.command.trash"),
     COMMAND_ANVIL("survival.command.anvil"),
+    COMMAND_LOOM("survival.command.loom"),
+    COMMAND_SMITHING_TABLE("survival.command.smithing_table"),
+    COMMAND_GRINDSTONE("survival.command.grindstone"),
+    COMMAND_CARTOGRAPHY_TABLE("survival.command.cartography_table"),
+    COMMAND_STONECUTTER("survival.command.stonecutter"),
     COMMAND_SPEED("survival.command.speed"),
     COMMAND_MENDING("survival.command.mending"),
+    COMMAND_COMPONENT("survival.command.component"),
+    COMMAND_SLEEP("survival.command.sleep"),
 
     // STORAGE
     COMMAND_BACKPACK("survival.storage.backpack"),
@@ -52,6 +60,9 @@ public enum PermissionEnum {
     // ADMIN
     COMMAND_ADMIN_INVSEE("survival.admin.command.invsee"),
     COMMAND_ENDERCHEST_OTHERS("survival.admin.command.enderchest.others"),
+    COMMAND_ADMIN_VANISH("survival.admin.command.vanish"),
+    COMMAND_ADMIN_VANISH_OTHERS("survival.admin.command.vanish.others"),
+    COMMAND_ADMIN_VANISH_SEE("survival.admin.command.vanish.see"),
     ;
 
     private String permission;

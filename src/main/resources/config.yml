@@ -37,6 +37,14 @@ spawn:
       yaw: 0
       pitch: 0
 
+# Si les deux sont activés, le fake est utilisé par défaut.
+# Le mode peut être forcé à chaque utilisation: /vanish <quiet|fake> [joueur]
+vanish:
+  default:
+    quiet: true
+    fake: false
+
+
 sizes:
   xs: 0.5
   small: 0.75

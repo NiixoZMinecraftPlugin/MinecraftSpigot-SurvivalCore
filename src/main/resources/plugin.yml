@@ -1,17 +1,32 @@
 name: SurvivalCore
 version: '${version}'
 main: fr.niixoz.survivalcore.SurvivalCore
-api-version: '1.21.6'
+api-version: '26.2'
 authors: [ NiixoZ ]
 description: Survival Core plugin
 softdepend:
   - Vault
+
+# Charge SurvivalCore avant Essentials pour réserver les labels courts
+# (/home, /feed, /fly...). Essentials garde ses commandes sous essentials:<cmd>.
+loadbefore:
+  - Essentials
+  - EssentialsX
+  - WorldEdit
+  - WorldGuard
 
 commands:
   svcore:
     description: Permet de recharger le plugin.
     usage: /svcore reload
     aliases: [ survivalcore ]
+  invsee:
+    description: Permet de voir l'inventaire d'un joueur.
+    usage: /invsee <joueur>
+  vanish:
+    description: Permet de devenir totalement invisible.
+    usage: /vanish [quiet|fake] [joueur]
+    aliases: [v]
 
   tpa:
     description: Permet d'envoyer une demande de téléportation à un joueur.
@@ -86,6 +101,12 @@ commands:
     description: Permet d'ouvrir l'enderchest.
     usage: /enderchest
     aliases: [ ec ]
+  component:
+    description: Command helper pour les components
+    usage: /component <show>
+  sleep:
+    description: Commande pour sleep au sol
+    usage: /sleep
 
   backpack:
     description: Permet d'ouvrir le sac à dos.
@@ -102,6 +123,7 @@ commands:
   mount:
     description: Permet de monter sur l'entité visée.
     usage: /mount
+    aliases: [ ride ]
   entitysize:
     description: Permet de changer la taile de l'entité visée.
     usage: /entitysize <value>
@@ -112,6 +134,23 @@ commands:
   anvil:
     description: Permet d'ouvrir une enclume.
     usage: /anvil
+  loom:
+    description: Permet d'ouvrir une enclume.
+    usage: /loom
+  smithing:
+    description: Permet d'ouvrir une enclume.
+    usage: /smithing
+    aliases: [ smithing_table ]
+  grindstone:
+    description: Permet d'ouvrir une enclume.
+    usage: /grindstone
+  cartography:
+    description: Permet d'ouvrir une enclume.
+    usage: /cartography
+    aliases: [ cartography_table ]
+  stonecutter:
+    description: Permet d'ouvrir une enclume.
+    usage: /stonecutter
   trash:
     description: Permet d'ouvrir une poubelle.
     usage: /trash
@@ -123,6 +162,17 @@ permissions:
     children:
       survival.teleport.*: true
       survival.home.*: true
+
+  survival.admin.command.invsee:
+    description: Admin invsee command
+  survival.admin.command.enderchest.others:
+    description: See other players enderchest.
+  survival.admin.command.vanish:
+    description: Permet de devenir totalement invisible.
+  survival.admin.command.vanish.others:
+    description: Permet d'activer le vanish d'un autre joueur.
+  survival.admin.command.vanish.see:
+    description: Permet de voir les joueurs en vanish.
 
   survival.teleport.*:
     description: Permet d'avoir toutes les permissions de téléportation.
@@ -173,6 +223,8 @@ permissions:
 
   survival.command.rename_item:
     description: Permet de renommer un item.
+  survival.command.rename_item.normal:
+    description: Permet de renommer un item sans le texte en italique.
   survival.command.vision:
     description: Permet d'activer ou désactiver la vision nocturne.
   survival.command.feed:
@@ -191,8 +243,22 @@ permissions:
     description: Permet d'ouvrir l'enderchest.
   survival.command.anvil:
     description: Permet d'ouvrir une enclume virtuelle.
+  survival.command.loom:
+    description: Permet d'ouvrir un loom virtuelle.
+  survival.command.smithing_table:
+    description: Permet d'ouvrir une smithing table virtuelle.
+  survival.command.grindstone:
+    description: Permet d'ouvrir un grindstone virtuelle.
+  survival.command.cartography_table:
+    description: Permet d'ouvrir une cartography table virtuelle.
+  survival.command.stonecutter:
+    description: Permet d'ouvrir un stonecutter virtuelle.
   survival.command.trash:
     description: Ouvre une poubelle pour détruire des items.
+  survival.command.component:
+    description: Command helper pour les components
+  survival.command.sleep:
+    description: Commande pour sleep.
 
   survival.command.speed:
     description: Permet de modifier son speed.

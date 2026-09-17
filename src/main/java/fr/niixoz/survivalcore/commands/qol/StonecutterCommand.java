@@ -6,21 +6,21 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.MenuType;
-import org.bukkit.inventory.view.EnchantmentView;
+import org.bukkit.inventory.view.StonecutterView;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class EnchantTableCommand extends AbstractCommand {
+public class StonecutterCommand extends AbstractCommand {
 
-    public EnchantTableCommand() {
-        super("enchanting_table", "Permet d'ouvrir une table d'enchant.", "/enchanting_table", PermissionEnum.COMMAND_ENCHANTING_TABLE);
+    public StonecutterCommand() {
+        super("stonecutter", "Permet d'ouvrir un Stone Cutter.", "/stonecutter", PermissionEnum.COMMAND_STONECUTTER);
     }
 
     @Override
     public boolean executeCommand(Player player, Command command, String s, String[] args) {
 
-        EnchantmentView view = MenuType.ENCHANTMENT.create(player, "Enchanting Table Portable");
+        StonecutterView view = MenuType.STONECUTTER.create(player, "Stonecutter Portable");
         player.openInventory(view);
 
         return true;

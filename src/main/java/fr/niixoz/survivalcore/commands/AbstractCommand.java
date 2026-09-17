@@ -18,17 +18,23 @@ public abstract class AbstractCommand implements CommandExecutor, TabCompleter {
     protected String usage;
     protected String permission;
 
+    protected boolean executeOnConsole;
+
     public AbstractCommand(String name, String description, String usage, PermissionEnum permission) {
         this.name = name;
         this.description = description;
         this.usage = usage;
         this.permission = permission.getPermission();
+        this.executeOnConsole = false;
     }
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] args) {
-        if(!(commandSender instanceof Player player))
+        if(!(commandSender instanceof Player player)) {
+            if(!executeOnConsole)
+                commandSender.sendMessage("§cCette commande n'est utilisable qu'en jeu.");
             return true;
+        }
         try {
             if(!commandSender.hasPermission(permission)) {
                 player.sendMessage("§cTu n'a pas la permission pour executer cette commande.");

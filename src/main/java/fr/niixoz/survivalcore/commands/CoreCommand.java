@@ -18,6 +18,7 @@ public class CoreCommand extends AbstractCommand {
 
     public CoreCommand() {
         super("svcore", "Commande de SurvivalCore", "/svcore", PermissionEnum.PERMISSION_ALL);
+        this.executeOnConsole = true;
     }
 
     @Override

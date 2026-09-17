@@ -47,7 +47,7 @@ public class LoggerHandler implements Listener {
                 if (m != null) {
                     watchedBlocks.add(m);
                 } else {
-                    plugin.getLogger().warning("Unknown material in logger.blocks: " + s);
+                    plugin.getLogger().warning("[Config] Unknown material in logger.blocks: " + s);
                 }
             }
             plugin.getServer().getPluginManager().registerEvents(this, plugin);

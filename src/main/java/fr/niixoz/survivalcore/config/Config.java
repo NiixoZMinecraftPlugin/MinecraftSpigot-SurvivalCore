@@ -26,6 +26,9 @@ public class Config {
     public static List<PlayerTeleportEvent.TeleportCause> backTeleportCauses = new ArrayList<>();
     public static boolean backOnDeath = true;
 
+    public static boolean vanishDefaultQuiet = true;
+    public static boolean vanishDefaultFake = false;
+
     public static Map<String, Double> sizes = new HashMap<>();
 
 
@@ -71,6 +74,11 @@ public class Config {
             }
         }
 
+        if(config.contains("vanish.default.quiet"))
+            vanishDefaultQuiet = config.getBoolean("vanish.default.quiet");
+        if(config.contains("vanish.default.fake"))
+            vanishDefaultFake = config.getBoolean("vanish.default.fake");
+
         if(config.contains("sizes")) {
             sizes.clear();
             sizes.put("normal", 1.0d);
@@ -104,12 +112,19 @@ public class Config {
     }
 
     private static void loadDefaultConfig(FileConfiguration config){
+        config.addDefault("vanish.default.quiet", true);
+        config.addDefault("vanish.default.fake", false);
         config.addDefault("logger.enabled", true);
         config.addDefault("logger.blocks", Arrays.asList(
                 "DIAMOND_BLOCK",
                 "DIAMOND_ORE",
                 "ANCIENT_DEBRIS"
         ));
+
+        // Écrit sur le disque les clés absentes du config.yml existant : sans ça les valeurs
+        // par défaut ne vivent qu'en mémoire et l'admin ne voit jamais les nouvelles options.
+        config.options().copyDefaults(true);
+        SurvivalCore.getInstance().saveConfig();
     }
 
     public static void reload() {

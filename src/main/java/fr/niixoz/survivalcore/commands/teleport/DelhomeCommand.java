@@ -28,7 +28,28 @@ public class DelhomeCommand extends AbstractCommand {
         }
 
         if(args.length == 1) {
-            if(enderPlayer.hasHome(args[0])) {
+            if(args[0].contains(":") && player.hasPermission(PermissionEnum.PERMISSION_ALL.getPermission())) {
+                String[] split = args[0].split(":");
+                if (split.length != 2) {
+                    MessageUtils.sendPlayerMessage(player, "§c/delhome <joueur:home>");
+                    return true;
+                }
+                if (!SurvivalPlayer.playersUUID.containsKey(split[0])) {
+                    MessageUtils.sendPlayerMessage(player, "§cLe joueur " + split[0] + " n'existe pas.");
+                    return true;
+                }
+
+                enderPlayer = new SurvivalPlayer(SurvivalPlayer.playersUUID.get(split[0]));
+                if (!enderPlayer.hasHome(split[1])) {
+                    MessageUtils.sendPlayerMessage(player, "§cLe joueur " + split[0] + " n'a pas de home nommé " + split[1]);
+                    return true;
+                }
+
+                enderPlayer.removeHome(args[0]);
+                MessageUtils.sendPlayerMessage(player, "Le home " + args[0] + " de " + split[0] + " a bien été supprimé.");
+                return true;
+            }
+            else if(enderPlayer.hasHome(args[0])) {
                 enderPlayer.removeHome(args[0]);
                 MessageUtils.sendPlayerMessage(player, "Le home " + args[0] + " a bien été supprimé.");
                 return true;
@@ -47,15 +68,28 @@ public class DelhomeCommand extends AbstractCommand {
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
 
-        if(!(sender instanceof Player))
+        if(!(sender instanceof Player p))
             return null;
 
         if(args.length == 1) {
-            SurvivalPlayer player = SurvivalPlayer.getPlayer((Player) sender);
-            if(player == null)
-                return Arrays.asList("");
+            if(args[0].contains(":") && p.hasPermission(PermissionEnum.PERMISSION_ALL.getPermission()))
+            {
+                String[] split = args[0].split(":");
+                if(split.length > 2)
+                    return Arrays.asList("");
+                if(!SurvivalPlayer.playersUUID.containsKey(split[0]))
+                    return Arrays.asList("");
 
-            return player.getHomes().stream().map(Home::getName).toList();
+                SurvivalPlayer player = new SurvivalPlayer(SurvivalPlayer.playersUUID.get(split[0]));
+                return player.getHomes().stream().map(home -> split[0] + ":" + home.getName()).filter(home -> home.toUpperCase().startsWith(args[0].toUpperCase())).toList();
+            }
+            else {
+                SurvivalPlayer player = SurvivalPlayer.getPlayer((Player) sender);
+                if (player == null)
+                    return Arrays.asList("");
+
+                return player.getHomes().stream().map(Home::getName).toList();
+            }
         }
 
         return Arrays.asList("");
