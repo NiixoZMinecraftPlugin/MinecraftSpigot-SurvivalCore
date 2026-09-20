@@ -17,7 +17,7 @@ import java.util.List;
 public class VisionCommand extends AbstractCommand {
 
     public VisionCommand() {
-        super("vision", "Permet d'activer ou désactiver la vision nocturne.", "/vision", PermissionEnum.COMMAND_VISION);
+        super("vision", "Permet d'activer ou désactiver la vision nocturne.", "/vision", PermissionEnum.COMMAND_VISION, List.of("nightvision", "nv"));
     }
 
     @Override

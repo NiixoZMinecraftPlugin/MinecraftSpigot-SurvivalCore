@@ -14,7 +14,7 @@ import java.util.List;
 public class EnderchestCommand extends AbstractCommand {
 
     public EnderchestCommand() {
-        super("enderchest", "Permet d'ouvrir l'enderchest.", "/enderchest", PermissionEnum.COMMAND_ENDERCHEST);
+        super("enderchest", "Permet d'ouvrir l'enderchest.", "/enderchest", PermissionEnum.COMMAND_ENDERCHEST, List.of("ec"));
     }
 
     @Override

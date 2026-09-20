@@ -14,7 +14,7 @@ import java.util.List;
 public class SmithingCommand extends AbstractCommand {
 
     public SmithingCommand() {
-        super("smithing", "Permet d'ouvrir une Smithing Table.", "/smithing", PermissionEnum.COMMAND_SMITHING_TABLE);
+        super("smithing", "Permet d'ouvrir une Smithing Table.", "/smithing", PermissionEnum.COMMAND_SMITHING_TABLE, List.of("smithing_table"));
     }
 
     @Override

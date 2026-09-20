@@ -19,8 +19,13 @@ import java.util.List;
 public class SizeCommand extends AbstractCommand {
 
     public SizeCommand() {
-        super("size", "Permet de changer sa taille", "", PermissionEnum.COMMAND_SIZE);
-        this.usage = "/size <" + String.join(" | ", Config.sizes.keySet()) + ">";
+        super(
+                "size",
+                "Permet de changer sa taille",
+                "/size <" + String.join(" | ", Config.sizes.keySet()) + ">",
+                PermissionEnum.COMMAND_SIZE,
+                List.of("scale", "resize")
+        );
     }
 
     @Override

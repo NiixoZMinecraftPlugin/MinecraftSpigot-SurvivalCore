@@ -7,10 +7,12 @@ import fr.niixoz.survivalcore.utils.MessageUtils;
 import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
 
+import java.util.List;
+
 public class BackpackCommand extends AbstractCommand {
 
     public BackpackCommand() {
-        super("backpack", "Permet d'ouvrir votre sac à dos.", "/backpack", PermissionEnum.COMMAND_BACKPACK);
+        super("backpack", "Permet d'ouvrir votre sac à dos.", "/backpack", PermissionEnum.COMMAND_BACKPACK, List.of("sac", "bp"));
     }
 
     public boolean executeCommand(Player player, Command command, String s, String[] args) {

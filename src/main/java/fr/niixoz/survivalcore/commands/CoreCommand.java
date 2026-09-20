@@ -1,6 +1,7 @@
 package fr.niixoz.survivalcore.commands;
 
 import fr.niixoz.survivalcore.config.Config;
+import fr.niixoz.survivalcore.managers.CommandsManager;
 import fr.niixoz.survivalcore.permissions.PermissionEnum;
 import fr.niixoz.survivalcore.storage.location.Spawn;
 import fr.niixoz.survivalcore.utils.MessageUtils;
@@ -17,7 +18,7 @@ import java.util.stream.Collectors;
 public class CoreCommand extends AbstractCommand {
 
     public CoreCommand() {
-        super("svcore", "Commande de SurvivalCore", "/svcore", PermissionEnum.PERMISSION_ALL);
+        super("svcore", "Commande de SurvivalCore", "/svcore", PermissionEnum.PERMISSION_ALL, List.of("survivalcore"));
         this.executeOnConsole = true;
     }
 
@@ -28,6 +29,8 @@ public class CoreCommand extends AbstractCommand {
             switch (args[0]) {
                 case "reload" -> {
                     Config.reload();
+                    CommandsManager.unregisterCommands();
+                    CommandsManager.registerCommands();
                     MessageUtils.sendPlayerMessage(player, "§aLe plugin a été rechargé avec succès !");
                     return true;
                 }

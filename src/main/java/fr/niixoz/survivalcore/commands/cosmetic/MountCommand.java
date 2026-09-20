@@ -16,7 +16,7 @@ import java.util.List;
 public class MountCommand extends AbstractCommand {
 
     public MountCommand() {
-        super("mount", "Permet de monter sur l'entité visée", "/mount", PermissionEnum.COMMAND_MOUNT);
+        super("mount", "Permet de monter sur l'entité visée", "/mount", PermissionEnum.COMMAND_MOUNT, List.of("ride"));
     }
 
     @Override

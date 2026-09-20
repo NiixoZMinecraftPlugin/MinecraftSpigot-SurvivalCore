@@ -18,7 +18,7 @@ import java.util.List;
 public class VanishCommand extends AbstractCommand {
 
     public VanishCommand() {
-        super("vanish", "Permet de devenir totalement invisible.", "/vanish [quiet|fake] [player]", PermissionEnum.COMMAND_ADMIN_VANISH);
+        super("vanish", "Permet de devenir totalement invisible.", "/vanish [quiet|fake] [player]", PermissionEnum.COMMAND_ADMIN_VANISH, List.of("v"));
     }
 
     @Override
@@ -68,7 +68,7 @@ public class VanishCommand extends AbstractCommand {
 
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
-        if(!(sender instanceof Player) || !sender.hasPermission(permission))
+        if(!(sender instanceof Player) || !sender.hasPermission(getPermission()))
             return Collections.emptyList();
 
         // Premier argument : le mode, ou directement un joueur.

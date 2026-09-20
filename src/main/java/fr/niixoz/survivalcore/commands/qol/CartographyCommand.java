@@ -13,7 +13,7 @@ import java.util.List;
 public class CartographyCommand extends AbstractCommand {
 
     public CartographyCommand() {
-        super("cartography", "Permet d'ouvrir une Cartography Table.", "/cartography", PermissionEnum.COMMAND_CARTOGRAPHY_TABLE);
+        super("cartography", "Permet d'ouvrir une Cartography Table.", "/cartography", PermissionEnum.COMMAND_CARTOGRAPHY_TABLE, List.of("cartography_table"));
     }
 
     @Override

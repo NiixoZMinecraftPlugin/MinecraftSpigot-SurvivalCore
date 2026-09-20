@@ -16,7 +16,7 @@ import java.util.List;
 public class FeedCommand extends AbstractCommand {
 
     public FeedCommand() {
-        super("feed", "Permet de se nourrir.", "/feed [player]", PermissionEnum.COMMAND_FEED);
+        super("feed", "Permet de se nourrir.", "/feed [player]", PermissionEnum.COMMAND_FEED, List.of("eat"));
     }
 
     @Override

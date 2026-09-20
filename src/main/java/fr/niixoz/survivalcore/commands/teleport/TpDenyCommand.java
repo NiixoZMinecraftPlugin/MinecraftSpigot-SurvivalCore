@@ -14,7 +14,7 @@ import java.util.List;
 public class TpDenyCommand extends AbstractCommand {
 
     public TpDenyCommand() {
-        super("tpdeny", "Permet de refuser une demande de téléportation", "/tpdeny <joueur>", PermissionEnum.COMMAND_TP_DENY);
+        super("tpdeny", "Permet de refuser une demande de téléportation", "/tpdeny <joueur>", PermissionEnum.COMMAND_TP_DENY, List.of("tpno"));
     }
 
     @Override

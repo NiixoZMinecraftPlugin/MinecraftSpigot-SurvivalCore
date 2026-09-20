@@ -3,8 +3,10 @@ package fr.niixoz.survivalcore;
 import fr.niixoz.survivalcore.config.Config;
 import fr.niixoz.survivalcore.listeners.*;
 import fr.niixoz.survivalcore.managers.CommandsManager;
+import fr.niixoz.survivalcore.managers.CosmeticManager;
 import fr.niixoz.survivalcore.managers.SleepManager;
 import fr.niixoz.survivalcore.managers.VanishManager;
+import fr.niixoz.survivalcore.permissions.PermissionEnum;
 import fr.niixoz.survivalcore.storage.players.SurvivalPlayer;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -27,6 +29,9 @@ public final class SurvivalCore extends JavaPlugin {
         //adventure = BukkitAudiences.create(this);
         Config.loadConfig();
 
+        PermissionEnum.registerAll();
+        CommandsManager.registerCommands();
+
         registerEvents();
         initPlugin();
     }
@@ -35,6 +40,8 @@ public final class SurvivalCore extends JavaPlugin {
     public void onDisable() {
         VanishManager.disable();
         SleepManager.disable();
+        CosmeticManager.disable();
+        CommandsManager.unregisterCommands();
         for(SurvivalPlayer enderPlayer : SurvivalPlayer.players) {
             enderPlayer.saveInfo();
         }
@@ -45,7 +52,6 @@ public final class SurvivalCore extends JavaPlugin {
     }
 
     private void initPlugin() {
-        CommandsManager.registerCommands();
         checkForOnlinePlayer();
         loadPlayersUUID();
         VanishManager.load();
@@ -56,6 +62,7 @@ public final class SurvivalCore extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(new CommandHandler(), this);
         this.getServer().getPluginManager().registerEvents(new VanishHandler(), this);
         this.getServer().getPluginManager().registerEvents(new SleepHandler(), this);
+        this.getServer().getPluginManager().registerEvents(new CosmeticHandler(), this);
         new LoggerHandler();
     }
 

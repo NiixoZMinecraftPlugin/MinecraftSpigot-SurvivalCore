@@ -15,7 +15,7 @@ import java.util.List;
 public class TrashCommand extends AbstractCommand {
 
     public TrashCommand() {
-        super("trash", "Ouvre une poubelle pour détruire des items.", "/trash", PermissionEnum.COMMAND_TRASH);
+        super("trash", "Ouvre une poubelle pour détruire des items.", "/trash", PermissionEnum.COMMAND_TRASH, List.of("poubelle"));
     }
 
     @Override

@@ -46,4 +46,15 @@ public class PlayerUtils {
         return null;
     }
 
+    /**
+     * true si le joueur a les pieds posés sur quelque chose.
+     *
+     * Player#isOnGround vient du client et retombe à faux dans des cas
+     * parfaitement normaux (le tick où l'on descend d'une monture, un escalier
+     * que l'on monte...). On vérifie donc nous-mêmes le bloc sous ses pieds.
+     */
+    public static boolean isGrounded(Player player) {
+        return player.isOnGround() || !player.getLocation().subtract(0, 0.05, 0).getBlock().isPassable();
+    }
+
 }

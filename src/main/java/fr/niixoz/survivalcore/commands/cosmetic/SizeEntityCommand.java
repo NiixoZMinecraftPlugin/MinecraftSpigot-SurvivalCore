@@ -17,8 +17,12 @@ import java.util.List;
 public class SizeEntityCommand extends AbstractCommand {
 
     public SizeEntityCommand() {
-        super("entitysize", "Permet de changer la taille de l'entité visée", "", PermissionEnum.COMMAND_ENTITY_SIZE);
-        this.usage = "/entitysize <" + String.join(" | ", Config.sizes.keySet()) + ">";
+        super(
+                "entitysize",
+                "Permet de changer la taille de l'entité visée",
+                "/entitysize <" + String.join(" | ", Config.sizes.keySet()) + ">",
+                PermissionEnum.COMMAND_ENTITY_SIZE
+        );
     }
 
     @Override

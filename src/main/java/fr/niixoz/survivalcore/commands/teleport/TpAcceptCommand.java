@@ -14,7 +14,7 @@ import java.util.List;
 public class TpAcceptCommand extends AbstractCommand {
 
     public TpAcceptCommand() {
-        super("tpaccept", "Permet d'accepter une demande de téléportation", "/tpaccept <joueur>", PermissionEnum.COMMAND_TP_ACCEPT);
+        super("tpaccept", "Permet d'accepter une demande de téléportation", "/tpaccept <joueur>", PermissionEnum.COMMAND_TP_ACCEPT, List.of("tpyes"));
     }
 
     @Override

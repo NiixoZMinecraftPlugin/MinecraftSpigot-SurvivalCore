@@ -11,75 +11,54 @@ import org.bukkit.entity.Player;
 import java.util.Arrays;
 import java.util.List;
 
-public abstract class AbstractCommand implements CommandExecutor, TabCompleter {
-
-    protected String name;
-    protected String description;
-    protected String usage;
-    protected String permission;
+public abstract class AbstractCommand extends Command implements TabCompleter {
 
     protected boolean executeOnConsole;
 
-    public AbstractCommand(String name, String description, String usage, PermissionEnum permission) {
-        this.name = name;
-        this.description = description;
-        this.usage = usage;
-        this.permission = permission.getPermission();
+    protected AbstractCommand(String name, String description, String usage, PermissionEnum permission) {
+        this(name, description, usage, permission, List.of());
+    }
+
+    protected AbstractCommand(String name, String description, String usage,
+                              PermissionEnum permission, List<String> aliases) {
+        super(name, description, usage, aliases);   // constructeur protected de Command
+        setPermission(permission.getPermission());
         this.executeOnConsole = false;
     }
 
     @Override
-    public boolean onCommand(CommandSender commandSender, Command command, String s, String[] args) {
-        if(!(commandSender instanceof Player player)) {
-            if(!executeOnConsole)
-                commandSender.sendMessage("§cCette commande n'est utilisable qu'en jeu.");
+    public boolean execute(CommandSender sender, String label, String[] args) {
+        if (!(sender instanceof Player player)) {
+            if (!executeOnConsole) sender.sendMessage("§cCette commande n'est utilisable qu'en jeu.");
             return true;
         }
         try {
-            if(!commandSender.hasPermission(permission)) {
-                player.sendMessage("§cTu n'a pas la permission pour executer cette commande.");
+            if (!sender.hasPermission(getPermission())) {
+                player.sendMessage("§cTu n'as pas la permission pour exécuter cette commande.");
                 return true;
             }
-            return executeCommand(player, command, s, args);
-        } catch(Exception e){
+            return executeCommand(player, this, label, args);
+        } catch (Exception e) {
             e.printStackTrace();
             player.sendMessage(Config.errorPrefix + Config.errorMessage);
         }
         return true;
     }
 
+    @Override
+    public List<String> tabComplete(CommandSender sender, String alias, String[] args) {
+        List<String> result = onTabComplete(sender, this, alias, args);
+        return result != null ? result : super.tabComplete(sender, alias, args); // noms de joueurs
+    }
+
     public abstract boolean executeCommand(Player player, Command command, String s, String[] args) throws Exception;
 
-    protected void usage() {}
-    public String getName() {
-        return this.name;
-    }
-
-    public String getDescription() {
-        return this.description;
-    }
-
-    public String getUsage() {
-        return this.usage;
-    }
-
-    public String getPermission() {
-        return this.permission;
-    }
-
-    public void sendUsage(CommandSender commandSender) {
-        commandSender.sendMessage("§cUtilisation de la commande: " + this.usage);
+    public void sendUsage(CommandSender sender) {
+        sender.sendMessage("§cUtilisation de la commande: " + getUsage());
     }
 
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
-        if(!(sender instanceof Player))
-            return null;
-
-        if(args.length == 1) {
-            return null;
-        }
-
-        return Arrays.asList("");
+        return null; // -> fallback noms de joueurs
     }
 }
