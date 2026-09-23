@@ -78,6 +78,11 @@ public class CosmeticHandler implements Listener {
         if(!GroundPoseManager.isMode(player, GroundPoseManager.Mode.LAY))
             return;
 
+        // La pose vient de démarrer : le temps qu'elle s'installe, on ignore les
+        // micro-ajustements de position (sinon le joueur se relève aussitôt allongé).
+        if(GroundPoseManager.isSettling(player))
+            return;
+
         Location to = event.getTo();
         if(to == null)
             return;

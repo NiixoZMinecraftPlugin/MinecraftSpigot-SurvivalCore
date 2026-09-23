@@ -15,7 +15,7 @@ import java.util.List;
 public class BackCommand extends AbstractCommand {
 
     public BackCommand() {
-        super("back", "Permet d'envoyer une demande de téléportation à un joueur", "/back", PermissionEnum.COMMAND_BACK);
+        super("back", "Permet d'envoyer une demande de téléportation à un joueur", "/back", PermissionEnum.COMMAND_TP_BACK);
     }
 
     @Override

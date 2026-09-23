@@ -53,16 +53,19 @@ public class WaitingTeleportTask extends BukkitRunnable {
 		playersInTask.remove(this.player);
 
 		if(autoCancel) {
-			this.player.sendMessage("§6[ §eTéléportation §6] §eLa demande de téléportation a expirée.");
+			if(player.isOnline())
+				this.player.sendMessage("§6[ §eTéléportation §6] §eLa demande de téléportation a expirée.");
 			return;
 		}
 
 		if(isCancel) {
-			this.player.sendMessage("§6[ §eTéléportation §6] §e" + this.target.getName() + " §ea refusé la téléportation.");
+			if(player.isOnline())
+				this.player.sendMessage("§6[ §eTéléportation §6] §e" + this.target.getName() + " §ea refusé la téléportation.");
 			return;
 		}
 
-		this.player.sendMessage("§6[ §eTéléportation §6] §e" + this.target.getName() + " §ea accepté la téléportation.");
+		if(player.isOnline())
+			this.player.sendMessage("§6[ §eTéléportation §6] §e" + this.target.getName() + " §ea accepté la téléportation.");
 
 		try {
 			if(callable != null)
@@ -154,6 +157,19 @@ public class WaitingTeleportTask extends BukkitRunnable {
 				tasks.add(task);
 		}
 		return tasks;
+	}
+
+	/**
+	 * Annule toutes les demandes de téléportation (en tant qu'émetteur ou destinataire)
+	 * impliquant ce joueur. À appeler à la déconnexion pour éviter que la tâche répétitive
+	 * ne reste bloquée indéfiniment sur un Player devenu invalide.
+	 */
+	public static void cancelAllFor(Player player) {
+		for(WaitingTeleportTask task : new ArrayList<>(tasks)) {
+			if(task.getPlayer().equals(player) || task.getTarget().equals(player)) {
+				task.stop(true, true);
+			}
+		}
 	}
 
 }

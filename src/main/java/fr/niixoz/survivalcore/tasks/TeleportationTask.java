@@ -67,7 +67,8 @@ public class TeleportationTask extends BukkitRunnable {
 		isTeleport = !isCancel;
 
 		if(isCancel) {
-			this.player.sendMessage("§6[ §eTéléportation §6] §eTéléportation annulée.");
+			if(player.isOnline())
+				this.player.sendMessage("§6[ §eTéléportation §6] §eTéléportation annulée.");
 			return;
 		}
 
@@ -81,6 +82,11 @@ public class TeleportationTask extends BukkitRunnable {
 
 	@Override
 	public void run() {
+		if(!player.isOnline()) {
+			stop(true);
+			return;
+		}
+
 		if(!freeMove && (player.getLocation().getBlockX() != oldLocation.getBlockX()
 				|| player.getLocation().getBlockY() != oldLocation.getBlockY()
 				|| player.getLocation().getBlockZ() != oldLocation.getBlockZ())

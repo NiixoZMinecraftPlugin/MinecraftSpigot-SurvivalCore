@@ -16,7 +16,7 @@ import java.util.List;
 public class HomesCommand extends AbstractCommand {
 
     public HomesCommand() {
-        super("home", "Permet de voir la liste de vos homes.", "/home", PermissionEnum.COMMAND_HOMES);
+        super("homes", "Permet de voir la liste de vos homes.", "/homes", PermissionEnum.COMMAND_HOMES);
     }
 
     @Override

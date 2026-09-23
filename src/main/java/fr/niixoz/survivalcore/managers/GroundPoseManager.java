@@ -62,6 +62,16 @@ public class GroundPoseManager {
     /** Tolérance (en blocs, au carré) avant de considérer qu'un joueur allongé a bougé. */
     public static final double MOVE_THRESHOLD_SQUARED = 0.0004D;
 
+    /**
+     * Ticks pendant lesquels un déplacement n'entraîne pas la relevée automatique.
+     *
+     * Le passage en pose couchée (Pose#SWIMMING) fait légèrement bouger la
+     * position remontée par le client le temps que le serveur s'ajuste : sans
+     * cette marge, CosmeticHandler#onMove prend ce micro-ajustement pour un vrai
+     * déplacement et relève le joueur aussitôt allongé.
+     */
+    private static final int SETTLE_TICKS = 4;
+
     private static final Map<UUID, State> STATES = new HashMap<>();
 
     private static BukkitTask task;
@@ -75,6 +85,8 @@ public class GroundPoseManager {
         private Block block;
         /** Contenu d'origine de ce bloc, à remettre en place ensuite. */
         private BlockData previous;
+        /** Ticks restants avant qu'un déplacement soit considéré comme volontaire. */
+        private int settleTicksLeft = SETTLE_TICKS;
 
         private State(Mode mode) {
             this.mode = mode;
@@ -118,6 +130,12 @@ public class GroundPoseManager {
     public static boolean isMode(Player player, Mode mode) {
         State state = STATES.get(player.getUniqueId());
         return state != null && state.mode == mode;
+    }
+
+    /** true tant que la pose vient de démarrer et n'a pas fini de s'installer (cf. SETTLE_TICKS). */
+    public static boolean isSettling(Player player) {
+        State state = STATES.get(player.getUniqueId());
+        return state != null && state.settleTicksLeft > 0;
     }
 
     /** Relève le joueur et rend son bloc au monde. Sans effet s'il n'est pas au sol. */
@@ -199,6 +217,9 @@ public class GroundPoseManager {
     }
 
     private static void update(Player player, State state) {
+        if(state.settleTicksLeft > 0)
+            state.settleTicksLeft--;
+
         Block head = head(player);
 
         if(Objects.equals(state.block, head))

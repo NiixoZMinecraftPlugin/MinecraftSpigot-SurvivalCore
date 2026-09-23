@@ -6,6 +6,8 @@ import fr.niixoz.survivalcore.permissions.PermissionEnum;
 import fr.niixoz.survivalcore.storage.location.Spawn;
 import fr.niixoz.survivalcore.storage.players.SurvivalPlayer;
 import fr.niixoz.survivalcore.storage.prefix.ChatIcon;
+import fr.niixoz.survivalcore.tasks.TeleportationTask;
+import fr.niixoz.survivalcore.tasks.WaitingTeleportTask;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -45,6 +47,15 @@ public class PlayerHandler implements Listener {
             enderPlayer.saveInfo();
             SurvivalPlayer.players.remove(enderPlayer);
         }
+
+        // Évite que les tâches de téléportation restent bloquées (et fuient en mémoire)
+        // sur un joueur devenu invalide après sa déconnexion.
+        TeleportationTask teleportationTask = TeleportationTask.getTask(e.getPlayer());
+        if (teleportationTask != null) {
+            teleportationTask.stop(true);
+        }
+
+        WaitingTeleportTask.cancelAllFor(e.getPlayer());
     }
 
     @EventHandler

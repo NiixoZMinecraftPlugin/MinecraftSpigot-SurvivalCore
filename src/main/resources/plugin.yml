@@ -22,8 +22,8 @@ permissions:
     children:
       survival.teleport.tpa: true
       survival.teleport.tpahere: true
-      survival.teleport.tpaccept: true
-      survival.teleport.tpdeny: true
+      survival.teleport.accept: true
+      survival.teleport.deny: true
       survival.teleport.back: true
 
   survival.homes.*:

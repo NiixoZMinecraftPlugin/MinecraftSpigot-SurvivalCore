@@ -41,16 +41,19 @@ public class WaitingTeleportHereTask extends WaitingTeleportTask {
 		playersInTask.remove(this.player);
 
 		if(autoCancel) {
-			this.player.sendMessage("§6[ §eTéléportation §6] §eLa demande de téléportation a expirée.");
+			if(player.isOnline())
+				this.player.sendMessage("§6[ §eTéléportation §6] §eLa demande de téléportation a expirée.");
 			return;
 		}
 
 		if(isCancel) {
-			this.player.sendMessage("§6[ §eTéléportation §6] §e" + this.target.getName() + " §ea refusé la téléportation.");
+			if(player.isOnline())
+				this.player.sendMessage("§6[ §eTéléportation §6] §e" + this.target.getName() + " §ea refusé la téléportation.");
 			return;
 		}
 
-		this.player.sendMessage("§6[ §eTéléportation §6] §e" + this.target.getName() + " §ea accepté la téléportation.");
+		if(player.isOnline())
+			this.player.sendMessage("§6[ §eTéléportation §6] §e" + this.target.getName() + " §ea accepté la téléportation.");
 
 		try {
 			if(callable != null)
